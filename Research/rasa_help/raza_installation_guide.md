@@ -102,7 +102,7 @@ virtual environment with
 
 2. ```pip install rasa-x --extra-index-url https://pypi.rasa.com/simple```
 
-3. ```pip install SQLAlchemy==1.3.22``` why? i dont know
+3. ```pip install SQLAlchemy==1.3.22``` This is for some reason missing and has to be installed afterwards
 
 4. ```rasa x```
    
