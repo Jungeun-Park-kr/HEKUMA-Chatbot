@@ -1,0 +1,70 @@
+
+#domain : 로봇이 대답해줄 내용
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents: #intent : 사용자가 물어보는 것
+- greet
+- inform
+- subscribe
+- ask_safety_door_info
+- ask_alarm
+- ask_how_to_fix
+- affirm
+- deny
+- ask_all_safety_doors_info
+
+entities:
+  - door_number
+
+slots: # 저장할 메모리
+  door_number: #safety door number
+    type: text
+    influence_conversation: false
+  email:
+    type: unfeaturized
+    influence_conversation: false
+
+responses:
+  utter_anything_else: 
+  - text: |
+      Do you need more help?
+  action_utter_supply_safety_door_info: # example 1 (문 정보 알려주기)
+  - text: |
+      Safety door {door_number} is currently unlocked.
+  utter_supply_alarm: # example 2 (알람 발생 알려주기)
+  - text: |
+      Alarm! Jamming of materian in "+TIP1".
+  utter_ask_fix: # example 2 (고칠 방법 설명 및 여부 묻기)
+  - text: |
+      Open safety door 1, replace material manually and restart module.
+      Shoud I unlock safety door 1 now?
+  utter_result_fix:
+  - text: |
+      All problems have been fixed.
+  utter_greet:
+  - text: |
+      Hello! How can I help you?
+  - text: |
+      Hi!
+  utter_ask_email:
+  - text: |
+      What is your email address?
+  utter_subscribed:
+  - text: |
+      Check your inbox at {email} in order to finish subscribing to the newsletter!
+  - text: You're all set! Check your inbox at {email} to confirm your subscription.
+
+actions:
+- '...'
+- utter_greet
+- utter_subscribed
+- action_utter_supply_safety_door_info #custom action (specific door)
+- action_utter_supply_all_safety_doors_info #custom action 2 (all doors)
+
+forms:
+  newsletter_form:
+    required_slots:
+      email:
+      - type: from_text

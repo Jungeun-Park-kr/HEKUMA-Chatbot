@@ -1,0 +1,49 @@
+version: "2.0"
+
+stories: # 스토리 이름은 봇 작동에 영향이 없음
+- story: greet and subscribe
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: subscribe
+  - action: newsletter_form
+  - active_loop: newsletter_form
+
+# - story : newsletter signup with OR
+#   steps:
+#     - intent: signup_newsletter
+#     - action: utter_ask_confirm_signup
+#     - or:
+#       - intent: affirm
+#       - intent: thanks
+#     - action: action signup newsletter
+
+- story : check all the safety doors are open or closed
+  steps:
+    - intent: ask_all_safety_doors_info
+    - action : action_utter_supply_all_safety_doors_info
+
+- story : check if the safety door is open or closed
+  steps:
+    - intent: ask_safety_door_info
+      entities:
+      - door_number
+    - action : action_utter_supply_safety_door_info
+
+- story: check is there an alarm 1
+  steps:
+    - intent: ask_alarm
+    - action : utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : affirm
+    - action : utter_result_fix
+
+- story: check is there an alarm 2
+  steps:
+    - intent: ask_alarm
+    - action : utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : deny
+    - action : utter_anything_else

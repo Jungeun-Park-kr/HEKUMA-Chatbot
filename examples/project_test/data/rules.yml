@@ -1,0 +1,20 @@
+rules:  #a way to describe short piees of conversations that always go the same way
+ - rule: activate subscribe form
+   steps:
+   - intent: subscribe
+   - action: newsletter_form
+   - active_loop: newsletter_form
+
+ - rule: submit form
+   condition:
+   - active_loop: newsletter_form
+   steps:
+   - action: newsletter_form
+   - active_loop: null
+   - action: utter_subscribed
+
+  # - rule: safety door number
+  # condition:
+  #   - active_loop:
+  #   steps:
+  #   - intent: 

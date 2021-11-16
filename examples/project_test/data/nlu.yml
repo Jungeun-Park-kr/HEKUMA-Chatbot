@@ -1,0 +1,63 @@
+nlu:
+- intent: greet
+  examples: |
+    - Hi
+    - Hey!
+    - Hallo
+    - Good day
+    - Good morning
+
+- intent: subscribe
+  examples: |
+    - I want to get the newsletter
+    - Can you send me the newsletter?
+    - Can you sign me up for the newsletter?
+
+- intent: inform
+  examples: |
+    - My email is example@example.com
+    - random@example.com
+    - Please send it to anything@example.com
+    - Email is something@example.com
+
+- intent: ask_safety_door_info # example 1
+  examples: |
+    - Is safety door [6](door_number) closed?
+    - Is safety door [23](door_number) open?
+
+
+- intent: ask_all_safety_doors_info
+  examples: |
+    - Show me all the safety door information
+    - Show me all the safety doors
+    - Are all safety doors locked?
+
+- intent: ask_alarm # example 2
+  examples: |
+    - Is there an alarm?
+
+- intent: ask_how_to_fix # example 2
+  examples: |
+    - How to fix this problem and bringing machine up?
+    - How to fix the machine?
+    - How can I solve it?
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
