@@ -1,0 +1,23 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: MyFirstBoolean
+  steps:
+  - intent: my_firstboolean_info
+  - action: action_utter_supply_myfirstboolean_info
+  - action: utter_action_MyFirstBoolean_completed
+
+- story : check if the safety door is open or closed
+  steps:
+    - intent: ask_safety_door_info
+      entities:
+      - door_number
+    - action : action_utter_supply_safety_door_info
+
+    
