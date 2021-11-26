@@ -1,0 +1,30 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: my_firstboolean_info
+  examples: |
+    - What's the value of MyFirstBoolean?
+    - MyFirstBoolean
+
+- intent: ask_safety_door_info
+  examples: |
+    - Is safety door [6](door_number) closed?
+    - Is safety door [23](door_number) open?
+
+
