@@ -1,0 +1,53 @@
+version: "2.0"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - ask_alarm 
+  - ask_how_to_fix 
+  - affirm
+  - deny
+  - restart
+  - restart_specific 
+
+entities:
+  - module_number
+
+slots: 
+  module_number: 
+    type: text
+    influence_conversation: false
+
+responses:
+  action_utter_supply_alarm: 
+  - text: |
+      Alarm! Jamming of materian in {module_number}.
+  utter_ask_fix: 
+  - text: |
+      Open safety door 1, replace material manually and restart module.
+      Shoud I unlock safety door 1 now?
+  utter_result_fix:
+  - text: |
+      All problems have been fixed.
+  utter_greet:
+  - text: |
+      Hi! 
+  utter_anything_else: 
+  - text: |
+      Do you need more help?
+  utter_restart: 
+  - text: |
+      Do you want to restart the faulty module {module_number}?
+  utter_info_button: 
+  - text: |
+      Safety door have to be locked manually before restart for safety reasons. The required activation button is shown now on panel 1
+  utter_restart_specific: 
+  - text: |
+      OK. Module {module_number} will be restarted
+
+actions:
+  - utter_greet
+
+
