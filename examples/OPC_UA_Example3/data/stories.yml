@@ -1,0 +1,55 @@
+version: "2.0"
+
+stories:
+
+- story: greet
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: check is there an alarm 1.1 #Alarma desbloqueo y restart
+  steps:
+    - intent: ask_alarm
+    - action : action_utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : affirm
+    - action : utter_result_fix
+    - intent: restart
+    - action: utter_restart
+    - intent: affirm
+    - action: utter_info_button
+    - intent: restart_specific 
+    - action: utter_restart_specific 
+
+- story: check is there an alarm 1.2 #Alarm desbloqueo y no restart
+  steps:
+    - intent: ask_alarm
+    - action : action_utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : affirm
+    - action : utter_result_fix
+    - intent: restart
+    - action: utter_restart
+    - intent : deny
+    - action : utter_anything_else
+
+- story: check is there an alarm 2 #Alarma y no desbloqueo
+  steps:
+    - intent: ask_alarm
+    - action : action_utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : deny
+    - action : utter_anything_else
+
+- story: check is there an alarm 3 #No alarma
+  steps:
+    - intent:  ask_alarm
+    - action : action_utter_supply_alarm
+    - intent : ask_how_to_fix
+    - action : utter_ask_fix
+    - intent : deny
+    - action : utter_anything_else
+    

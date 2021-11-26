@@ -1,0 +1,48 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hi
+    - Hey
+    - Hello
+    - Good morning
+    - Good afternoon
+    - Good evening
+
+- intent: ask_alarm 
+  examples: |
+    - Is there an alarm?
+
+- intent: ask_how_to_fix 
+  examples: |
+    - How to fix this problem and bringing machine up?
+    - How to fix the machine?
+    - How can I solve it?
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - don't like that
+    - no way
+    - not really
+
+- intent: restart
+  examples: |
+    - Restart module!
+    - Restart 
+
+- intent: restart_specific 
+  examples: |
+    - Restart [6](module_number)
+    - Restart [23](module_number), now!
