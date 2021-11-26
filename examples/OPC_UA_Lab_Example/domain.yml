@@ -1,0 +1,30 @@
+version: "2.0"
+
+intents:
+  - greet
+  - my_firstboolean_info
+  - ask_safety_door_info
+
+entities:
+  - door_number
+
+slots: 
+  door_number: 
+    type: text
+    influence_conversation: false
+
+responses:
+  utter_greet:
+  - text: "Hey!"
+  
+  utter_action_MyFirstBoolean_completed:
+  - text: |
+      MyFirstBoolean completed
+
+actions:
+  - action_utter_supply_myfirstboolean_info
+  - action_utter_supply_safety_door_info
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
