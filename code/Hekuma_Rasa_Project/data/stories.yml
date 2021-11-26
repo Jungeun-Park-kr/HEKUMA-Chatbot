@@ -20,4 +20,20 @@ stories:
       - door_number
     - action : action_utter_supply_safety_door_info
 
-    
+- story: react to JammingMaterialAlarm 
+  steps:
+  #TODO: Make bot say something if there is a JammingMaterialAlarm
+    - intent: ask_alarm
+    - action : action_utter_supply_alarm
+    - intent : ask_how_to_fix
+    #make utter_answer_fix
+    - action : utter_ask_fix
+    #change state of ???
+    - action : utter_result_fix
+    #from this part on it depends on Andreas how to implement it
+    - intent: restart
+    - action: utter_restart
+    - intent: affirm
+    - action: utter_info_button
+    - intent: restart_specific 
+    - action: utter_restart_specific 

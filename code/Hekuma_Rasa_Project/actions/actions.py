@@ -65,3 +65,34 @@ class ActionSafetyDoor(Action):
 
         return []
 
+class ActionAlarm(Action):
+    
+    def name(self) -> Text:
+        return "action_utter_supply_alarm"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]: #TODO: check if domain necessary
+
+        #module_number = next(tracker.get_latest_entity_values("module_number"), None)
+
+        url = "opc.tcp://10.0.0.107:4840" 
+        async with Client(url=url) as client:
+            
+            #fetch alarm
+            s = "AGENT.OBJECTS.Machine.SafetyZones.SafetyZone1.SafetyModule_" + module_number + ".isOpen"
+            node_id = "ns=1;s=" + s
+            #TODO: what if there is safety module with number 'module_number'
+            module_status_async = client.get_node(node_id)
+            module_status = await module_status_async.read_value()
+
+            # # Check user input value and safety module value
+            # dispatcher.utter_message(text=f"User input safety module number: {module_number}")
+            # dispatcher.utter_message(text=f"Module state of number {module_number}: {ModuleStates[int(module_number)]}")
+
+            if module_status: # True:on, False:off
+                dispatcher.utter_message(text=f"Alarm! Jamming of materian in {module_number}.") 
+            else : 
+                dispatcher.utter_message(text=f"Stop?")
+
+        return []
