@@ -18,3 +18,17 @@ stories:
         entities:
           - door_number
       - action: action_utter_supply_safety_door_info
+
+  - story: Supply user with the datetime when component x was changed the last time
+    steps:
+      - intent: ask_component_last_changed_info
+        entities:
+          - component
+      - action: action_utter_supply_component_last_changed_info
+
+  - story: Supply user with the location of the component
+    steps:
+      - intent: ask_component_location_info
+        entities:
+          - component
+      - action: action_utter_supply_component_location_info

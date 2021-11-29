@@ -30,7 +30,9 @@ nlu:
   - intent: ask_component_last_changed_info
     examples: |
       - When was the [coil roll](component) changed the last time?
+      - When was the [part x](component) changed the last time?
 
   - intent: ask_component_location_info
     examples: |
       - Where is component [-Z2.3z2](component)?
+      - Where is component [-Z3.3z2](component)?
