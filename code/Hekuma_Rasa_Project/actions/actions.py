@@ -16,7 +16,7 @@ import asyncio
 import time
 
 #url = "opc.tcp://141.82.144.254:4840"
-url = "opc.tcp://10.0.0.107:4840"
+url = "opc.tcp://10.0.0.107:4840" # this should be in the constructor!
 
 class ActionMyFirstBoolean(Action):
 
@@ -25,7 +25,7 @@ class ActionMyFirstBoolean(Action):
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:  # TODO: check if domain necessary
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         async with Client(url=url) as client:
             var = client.get_node("ns=1;s=AGENT.OBJECTS.MyFirstBoolean")
@@ -41,7 +41,7 @@ class ActionSafetyDoor(Action):
 
     async def run(self, dispatcher: CollectingDispatcher,
                   tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:  # TODO: check if domain necessary
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         door_number = next(
             tracker.get_latest_entity_values("door_number"), None)
@@ -69,8 +69,8 @@ class ActionSafetyDoor(Action):
 
                         return []
 
-            dispatcher.utter_message(
-                                text=f"Safety door with the number {door_number} is not available.")
+            dispatcher.utter_message(text=f"Safety door with the number {door_number} is not available.")
+
         return []
 
 
