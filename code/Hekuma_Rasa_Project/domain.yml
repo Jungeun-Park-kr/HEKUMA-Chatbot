@@ -1,30 +1,44 @@
-version: "2.0"
-
-intents:
-  - greet
-  - my_firstboolean_info
-  - ask_safety_door_info
-
-entities:
-  - door_number
-
-slots: 
-  door_number: 
-    type: text
-    influence_conversation: false
-
-responses:
-  utter_greet:
-  - text: "Hey!"
-  
-  utter_action_MyFirstBoolean_completed:
-  - text: |
-      MyFirstBoolean completed
-
-actions:
-  - action_utter_supply_myfirstboolean_info
-  - action_utter_supply_safety_door_info
-
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- my_firstboolean_info:
+    use_entities: true
+- ask_safety_door_info:
+    use_entities: true
+- ask_component_last_changed_info:
+    use_entities: true
+- ask_component_location_info:
+    use_entities: true
+entities:
+- door_number
+- component
+slots:
+  door_number:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  component:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_greet:
+  - text: Hey!
+  utter_action_MyFirstBoolean_completed:
+  - text: |
+      MyFirstBoolean completed
+actions:
+- action_utter_supply_myfirstboolean_info
+- action_utter_supply_safety_door_info
+- action_utter_supply_component_last_changed_info
+- action_utter_supply_component_location_info
+forms: {}
+e2e_actions: []

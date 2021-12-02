@@ -1,10 +1,16 @@
 version: "2.0"
 
-#rules:
-# Example:
-# - rule: Say goodbye anytime the user says goodbye
-#   steps:
-#   - intent: goodbye
-#   - action: utter_goodbye
+# rules:
+#   - rule: Supply user with the datetime when component x was changed the last time
+#     steps:
+#       - intent: ask_component_last_changed_info
+#         entities:
+#           - component
+#       - action: action_utter_supply_component_last_changed_info
 
-
+#   - rule: Supply user with the location of the component
+#     steps:
+#       - intent: ask_component_location_info
+#         entities:
+#           - component
+#       - action: action_utter_supply_component_location_info
