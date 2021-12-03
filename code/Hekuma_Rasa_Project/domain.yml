@@ -27,9 +27,12 @@ intents:
     use_entities: true
 - ask_conversationID:
     use_entities: true
+- ask_cylinder_location:
+    use_entities: true
+
 entities:
 - door_number
-- cylinder
+- cylinder_which_caused_alarm
 - module_number
 slots:
   door_number:
@@ -37,7 +40,7 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  cylinder:
+  cylinder_which_caused_alarm:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -72,6 +75,7 @@ responses:
   utter_restart_specific:
   - text: |
       OK. Module {module_number} will be restarted
+
 actions:
 - action_utter_supply_myfirstboolean_info
 - action_utter_supply_safety_door_info

@@ -68,4 +68,9 @@ nlu:
 - intent: ask_conversationID
   examples: |
    - What is the conversation id?
+
+- intent: ask_cylinder_location
+  examples: |
+    - Where is this cylinder located?
+    - What is the location of this cylinder?
    
