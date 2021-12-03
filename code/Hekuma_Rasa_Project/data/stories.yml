@@ -1,24 +1,30 @@
 version: "2.0"
 
 stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
+  - story: MyFirstBoolean
+    steps:
+      - intent: my_firstboolean_info
+      - action: action_utter_supply_myfirstboolean_info
+      - action: utter_action_MyFirstBoolean_completed
 
-- story: MyFirstBoolean
-  steps:
-  - intent: my_firstboolean_info
-  - action: action_utter_supply_myfirstboolean_info
-  - action: utter_action_MyFirstBoolean_completed
+  - story: check if the safety door is open or closed
+    steps:
+      - intent: ask_safety_door_info
+        entities:
+          - door_number
+      - action: action_utter_supply_safety_door_info
 
-- story : check if the safety door is open or closed
-  steps:
-    - intent: ask_safety_door_info
-      entities:
-      - door_number
-    - action : action_utter_supply_safety_door_info
+  - story: Supply user with the datetime when component x was changed the last time
+    steps:
+      - intent: ask_component_last_changed_info
+        entities:
+          - component
+      - action: action_utter_supply_component_last_changed_info
 
 
 - story : ask for session id 
@@ -52,3 +58,11 @@ stories:
 #     - action: utter_info_button
 #     - intent: restart_specific 
 #     - action: utter_restart_specific 
+
+  - story: Supply user with the location of the component
+    steps:
+      - intent: ask_component_location_info
+        entities:
+          - component
+      - action: action_utter_supply_component_location_info
+
