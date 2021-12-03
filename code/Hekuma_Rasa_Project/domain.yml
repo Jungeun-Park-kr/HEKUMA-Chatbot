@@ -1,61 +1,81 @@
-version: "2.0"
-
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
-  - greet
-  - my_firstboolean_info
-  - ask_safety_door_info
-  - ask_alarm 
-  - ask_how_to_fix 
-  - affirm
-  - deny
-  - restart
-  - restart_specific 
-
+- greet:
+    use_entities: true
+- my_firstboolean_info:
+    use_entities: true
+- ask_safety_door_info:
+    use_entities: true
+- ask_alarm:
+    use_entities: true
+- ask_how_to_fix:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- restart:
+    use_entities: true
+- restart_specific:
+    use_entities: true
+- EXTERNAL_alarm_cylinder_alarm:
+    use_entities: true
+- ask_conversationID:
+    use_entities: true
 entities:
-  - door_number
-
-slots: 
-  door_number: 
-    type: text
+- door_number
+- cylinder
+- module_number
+slots:
+  door_number:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
-
+  cylinder:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
 responses:
   utter_greet:
-  - text: "Hey!"
-  
+  - text: Hey!
+  utter_warn_cylinder_alarm:
+  - text: Attention! {cylinder} hasn't reached a working position !
   utter_action_MyFirstBoolean_completed:
   - text: |
       MyFirstBoolean completed
-
-  #TODO: Please check if all responses are necessary
-  action_utter_supply_alarm: 
+  action_utter_supply_alarm:
   - text: |
       Alarm! Jamming of materian in {module_number}.
-  utter_ask_fix: 
+  utter_ask_fix:
   - text: |
       Open safety door 1, replace material manually and restart module.
       Shoud I unlock safety door 1 now?
   utter_result_fix:
   - text: |
       All problems have been fixed.
-  utter_anything_else: 
+  utter_anything_else:
   - text: |
       Do you need more help?
-  utter_restart: 
+  utter_restart:
   - text: |
       Do you want to restart the faulty module {module_number}?
-  utter_info_button: 
+  utter_info_button:
   - text: |
       Safety door have to be locked manually before restart for safety reasons. The required activation button is shown now on panel 1
-  utter_restart_specific: 
+  utter_restart_specific:
   - text: |
       OK. Module {module_number} will be restarted
-
-
 actions:
-  - action_utter_supply_myfirstboolean_info
-  - action_utter_supply_safety_door_info
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+- action_utter_supply_myfirstboolean_info
+- action_utter_supply_safety_door_info
+- action_tell_id
+- action_utter_supply_alarm
+forms: {}
+e2e_actions: []

@@ -64,3 +64,8 @@ nlu:
   examples: |
     - Restart [6](module_number)
     - Restart [23](module_number), now!
+
+- intent: ask_conversationID
+  examples: |
+   - What is the conversation id?
+   

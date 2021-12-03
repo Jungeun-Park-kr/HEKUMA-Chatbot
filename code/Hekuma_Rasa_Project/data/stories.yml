@@ -20,6 +20,12 @@ stories:
       - door_number
     - action : action_utter_supply_safety_door_info
 
+
+- story : ask for session id 
+  steps: 
+    - intent: ask_conversationID
+    - action: action_tell_id
+
 - story: react to JammingMaterialAlarm 
   steps:
   #TODO: Make bot say something if there is a JammingMaterialAlarm
