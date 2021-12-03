@@ -27,18 +27,18 @@ stories:
       - action: action_utter_supply_component_last_changed_info
 
 
-- story : ask for session id 
-  steps: 
-    - intent: ask_conversationID
-    - action: action_tell_id
+  - story : ask for session id 
+    steps: 
+      - intent: ask_conversationID
+      - action: action_tell_id
 
 
-- story: Cylinder alarm
-  steps: 
-    - intent: EXTERNAL_alarm_cylinder_alarm
-    - action: utter_warn_cylinder_alarm
-    - intent: ask_cylinder_location
-    #- action: utter_cylinder_location
+  - story: Cylinder alarm
+    steps: 
+      - intent: EXTERNAL_alarm_cylinder_alarm
+      - action: utter_warn_cylinder_alarm
+      - intent: ask_cylinder_location
+      #- action: utter_cylinder_location
 
 
 # - story: react to JammingMaterialAlarm 
