@@ -83,4 +83,6 @@ nlu:
     examples: |
       - Where is component [-Z2.3z2](component)?
       - Where is component [-Z3.3z2](component)?
+      - Where is component [part x](component)?
+      - Where is component [coil roll](component)?
 

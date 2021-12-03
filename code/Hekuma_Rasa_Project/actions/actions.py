@@ -178,3 +178,42 @@ class ActionGetComponentLocation(Action):
 
         return []
 
+class ActionGetAlarmCylinderLocation(Action):
+    def name(self) -> Text:
+        return "action_utter_alarm_cylinder_location_info"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        component_name = next(tracker.get_latest_entity_values("cylinder_which_caused_alarm"), None)
+        print(component_name)
+        #TODO: refactor from done here, also 
+        async with Client(url=url) as client:
+
+            stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
+            stations_node = client.get_node(stations_path)
+            stations = await stations_node.get_children()
+
+            for station in stations:
+                tips = await client.get_node(station).get_children()
+
+                for tip in tips:
+                    components = await client.get_node(f'{tip}' + ".Components").get_children()
+
+                    for component in components:
+                        master_data = client.get_node(f'{component}' + ".MasterData")
+                        equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
+
+                        if component_name == equipment_id_number.lower():
+                            component = f'{component}'.rsplit('.', 1)[1]
+                            tip = f'{tip}'.rsplit('.', 1)[1]
+                            station = f'{station}'.rsplit('.', 1)[1]
+                            
+                            dispatcher.utter_message(text=f"The component {component_name} ist part of the {component} which is in {tip} of the {station}.")
+                            return []
+
+            dispatcher.utter_message(text=f"There is no component with the name {component_name}")
+
+        return []
+
