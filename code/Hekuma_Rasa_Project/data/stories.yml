@@ -26,9 +26,43 @@ stories:
           - component
       - action: action_utter_supply_component_last_changed_info
 
+
+- story : ask for session id 
+  steps: 
+    - intent: ask_conversationID
+    - action: action_tell_id
+
+
+- story: Cylinder alarm
+  steps: 
+    - intent: EXTERNAL_alarm_cylinder_alarm
+    - action: utter_warn_cylinder_alarm
+    - intent: ask_cylinder_location
+    #- action: utter_cylinder_location
+
+
+# - story: react to JammingMaterialAlarm 
+#   steps:
+#   #TODO: Make bot say something if there is a JammingMaterialAlarm
+#     - intent: ask_alarm
+#     - action : action_utter_supply_alarm
+#     - intent : ask_how_to_fix
+#     #make utter_answer_fix
+#     - action : utter_ask_fix
+#     #change state of ???
+#     - action : utter_result_fix
+#     #from this part on it depends on Andreas how to implement it
+#     - intent: restart
+#     - action: utter_restart
+#     - intent: affirm
+#     - action: utter_info_button
+#     - intent: restart_specific 
+#     - action: utter_restart_specific 
+
   - story: Supply user with the location of the component
     steps:
       - intent: ask_component_location_info
         entities:
           - component
       - action: action_utter_supply_component_location_info
+
