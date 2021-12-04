@@ -6,16 +6,16 @@ rules:
       - intent: session_start
       - action: action_session_start
 
-  - rule: Warn user of an external alarm
-    steps:
-      - intent: warn_external_alarm
-        entities:
-          - component
-      - action: utter_warn_alarm
-
-  - rule: Supply user with the location of the component
-    steps:
-      - intent: ask_component_location_info
-        entities:
-          - component
-      - action: action_utter_supply_component_location_info
+#  - rule: Warn user of an external alarm
+#    steps:
+#      - intent: warn_external_alarm
+#        entities:
+#          - component
+#      - action: utter_warn_alarm
+#
+#  - rule: Supply user with the location of the component
+#    steps:
+#      - intent: ask_component_location_info
+#        entities:
+#          - component
+#      - action: action_utter_supply_component_location_info

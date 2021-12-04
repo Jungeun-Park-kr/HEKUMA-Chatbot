@@ -53,7 +53,7 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "warn_external_alarm",
                 "entities": {
-                    "component" : "StupidCylinder",
+                    "component_with_alarm" : "-Z2.3z2",
                 }
             }
 
@@ -64,7 +64,7 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "warn_external_alarm",
                 "entities": {
-                    "component" : "SomeOtherComponent",
+                    "component_with_alarm" : "SomeOtherComponent",
                 }
             }
 

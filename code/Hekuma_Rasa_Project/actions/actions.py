@@ -189,3 +189,44 @@ class ActionGetComponentLocation(Action):
 
         return []
 
+
+class ActionGetAlarmCylinderLocation(Action):
+    def name(self) -> Text:
+        return "action_utter_supply_alarm_cylinder_location_info"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        component_name = tracker.get_slot('component_with_alarm')
+        print(component_name)
+        #TODO: refactor from done here
+        async with Client(url=url) as client:
+
+            stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
+            stations_node = client.get_node(stations_path)
+            stations = await stations_node.get_children()
+
+            for station in stations:
+                print("1")
+                tips = await client.get_node(station).get_children()
+                print("2")
+                for tip in tips:
+                    components = await client.get_node(f'{tip}' + ".Components").get_children()
+                    print("3")
+                    for component in components:
+                        master_data = client.get_node(f'{component}' + ".MasterData")
+                        equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
+                        print("4")
+                        if component_name == equipment_id_number.lower():
+                            print("5")
+                            component = f'{component}'.rsplit('.', 1)[1]
+                            tip = f'{tip}'.rsplit('.', 1)[1]
+                            station = f'{station}'.rsplit('.', 1)[1]
+                            
+                            dispatcher.utter_message(text=f"The component {component_name} ist part of the {component} which is in {tip} of the {station}.")
+                            return []
+
+            dispatcher.utter_message(text=f"There is no component with the name {component_name}")
+
+        return []

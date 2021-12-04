@@ -31,20 +31,18 @@ stories:
       - intent: ask_conversationID
       - action: action_tell_id
 
-  # - story: Supply user with the location of the component
-  #   steps:
-  #     - intent: ask_component_location_info
-  #       entities:
-  #         - component
-  #     - action: action_utter_supply_component_location_info
+  - story: Supply user with the location of the component
+    steps:
+      - intent: ask_component_location_info
+        entities:
+          - component
+      - action: action_utter_supply_component_location_info
 
-  # - story: Warn user of an external alarm
-  #   steps:
-  #     - intent: warn_external_alarm
-  #       entities:
-  #         - component
-  #     - action: utter_warn_alarm
-  #     - intent: ask_component_location_info
-  #       entities:
-  #         - component
-  #     - action: action_utter_supply_component_location_info
+  - story: Warn user of an external alarm
+    steps:
+      - intent: warn_external_alarm
+        entities:
+          - component_with_alarm
+      - action: utter_warn_alarm
+      - intent: ask_component_with_alarm_location
+      - action: action_utter_supply_alarm_cylinder_location_info

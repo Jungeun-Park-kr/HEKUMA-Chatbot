@@ -79,5 +79,9 @@ nlu:
       - Where is component [-Z3.3z2](component)?
       - Where is component [part x](component)?
       - Where is component [coil roll](component)?
+
+  - intent: ask_component_with_alarm_location
+    examples: |
       - Where is the component?
       - Where is this component?
+      - Where is the location of this part?
