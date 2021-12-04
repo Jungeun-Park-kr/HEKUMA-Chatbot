@@ -5,6 +5,8 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- session_start:
+    use_entities: true
 - greet:
     use_entities: true
 - my_firstboolean_info:
@@ -23,28 +25,23 @@ intents:
     use_entities: true
 - restart_specific:
     use_entities: true
-- EXTERNAL_alarm_cylinder_alarm:
-    use_entities: true
 - ask_conversationID:
     use_entities: true
-- ask_cylinder_location:
-    use_entities: true
 - ask_component_last_changed_info:
-    use_entities: true
+    use_entities:
+    - component
 - ask_component_location_info:
-    use_entities: true
+    use_entities:
+    - component
+- warn_external_alarm:
+    use_entities:
+    - component
 entities:
 - door_number
-- cylinder_which_caused_alarm
 - module_number
 - component
 slots:
   door_number:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  cylinder_which_caused_alarm:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -57,8 +54,6 @@ slots:
 responses:
   utter_greet:
   - text: Hey!
-  utter_warn_cylinder_alarm:
-  - text: Attention! {cylinder_which_caused_alarm} hasn't reached a working position !
   utter_action_MyFirstBoolean_completed:
   - text: |
       MyFirstBoolean completed
@@ -84,13 +79,15 @@ responses:
   utter_restart_specific:
   - text: |
       OK. Module {module_number} will be restarted
+  utter_warn_alarm:
+  - text: Attention! {component} hasn't reached a working position !
 actions:
+- action_session_start
 - action_utter_supply_myfirstboolean_info
 - action_utter_supply_safety_door_info
 - action_tell_id
 - action_utter_supply_alarm
 - action_utter_supply_component_last_changed_info
 - action_utter_supply_component_location_info
-- action_utter_alarm_cylinder_location_info
 forms: {}
 e2e_actions: []

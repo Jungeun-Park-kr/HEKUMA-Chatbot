@@ -26,51 +26,25 @@ stories:
           - component
       - action: action_utter_supply_component_last_changed_info
 
-
-  - story : ask for session id 
-    steps: 
+  - story: ask for session id
+    steps:
       - intent: ask_conversationID
       - action: action_tell_id
 
+  # - story: Supply user with the location of the component
+  #   steps:
+  #     - intent: ask_component_location_info
+  #       entities:
+  #         - component
+  #     - action: action_utter_supply_component_location_info
 
-    
-  - story: Cylinder alarm
-    # Trigger like this:
-    # - type following command into windows powershell
-    # curl.exe -H "Content-Type: application/json" -X POST -d '{ \"name\": \"EXTERNAL_alarm_cylinder_alarm\", \"entities\": {\"cylinder_which_caused_alarm\": \"-Z2.3z2\"}}' http://localhost:5005/conversations/{conversationId}/trigger_intent?output_channel=latest
-    # - be sure to use the right conversation id, by replacing 'conversationId' in the command
-    #   - you can get the conversation id by just asking the chatbot: "What is the conversation id?"
-    steps: 
-      - intent: EXTERNAL_alarm_cylinder_alarm
-      - action: utter_warn_cylinder_alarm
-      - intent: ask_cylinder_location
-      - action: action_utter_alarm_cylinder_location_info
-
-
-
-
-# - story: react to JammingMaterialAlarm 
-#   steps:
-#   #TODO: Make bot say something if there is a JammingMaterialAlarm
-#     - intent: ask_alarm
-#     - action : action_utter_supply_alarm
-#     - intent : ask_how_to_fix
-#     #make utter_answer_fix
-#     - action : utter_ask_fix
-#     #change state of ???
-#     - action : utter_result_fix
-#     #from this part on it depends on Andreas how to implement it
-#     - intent: restart
-#     - action: utter_restart
-#     - intent: affirm
-#     - action: utter_info_button
-#     - intent: restart_specific 
-#     - action: utter_restart_specific 
-
-  - story: Supply user with the location of the component
-    steps:
-      - intent: ask_component_location_info
-        entities:
-          - component
-      - action: action_utter_supply_component_location_info
-
+  # - story: Warn user of an external alarm
+  #   steps:
+  #     - intent: warn_external_alarm
+  #       entities:
+  #         - component
+  #     - action: utter_warn_alarm
+  #     - intent: ask_component_location_info
+  #       entities:
+  #         - component
+  #     - action: action_utter_supply_component_location_info

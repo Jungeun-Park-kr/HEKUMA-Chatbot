@@ -1,13 +1,21 @@
 version: "2.0"
 
 rules:
-# Example:
-# - rule: Say goodbye anytime the user says goodbye
-#   steps:
-#   - intent: goodbye
-#   - action: utter_goodbye
-
-  - rule: warn about cylinder alarm
+  - rule: conversation initializer
     steps:
-    - intent: EXTERNAL_alarm_cylinder_alarm
-    - action: utter_warn_cylinder_alarm
+      - intent: session_start
+      - action: action_session_start
+
+  - rule: Warn user of an external alarm
+    steps:
+      - intent: warn_external_alarm
+        entities:
+          - component
+      - action: utter_warn_alarm
+
+  - rule: Supply user with the location of the component
+    steps:
+      - intent: ask_component_location_info
+        entities:
+          - component
+      - action: action_utter_supply_component_location_info

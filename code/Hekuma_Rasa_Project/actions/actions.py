@@ -1,22 +1,42 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, EventType
 
 # Add codes for using OPCUA
 from asyncua import Client
-import asyncio
-import time
 
-#url = "opc.tcp://141.82.144.254:4840"
-url = "opc.tcp://10.0.0.107:4840" # this should be in the constructor!
+from pathlib import Path
+import sys
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
+from callback_server.server import SubscribeAll
+
+url = "opc.tcp://141.82.144.254:4840"
+#url = "opc.tcp://10.0.0.107:4840"
+
+
+class ActionSessionStart(Action):
+
+    def name(self) -> Text:
+        return "action_session_start"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # the session should begin with a `session_started` event
+        events = [SessionStarted()]
+
+        # an `action_listen` should be added at the end as a user message follows
+        events.append(ActionExecuted("action_listen"))
+
+        await SubscribeAll.run(tracker.sender_id)
+
+        return events
+
 
 class ActionMyFirstBoolean(Action):
 
@@ -74,7 +94,6 @@ class ActionSafetyDoor(Action):
         return []
 
 
-
 class ActionTellID(Action):
     """Informs the user about the conversation ID."""
 
@@ -88,8 +107,7 @@ class ActionTellID(Action):
         conversation_id = tracker.sender_id
 
         dispatcher.utter_message(f"The ID of this conversation is '{conversation_id}'.")
-        )
-
+        
         return []
 
 
@@ -164,45 +182,7 @@ class ActionGetComponentLocation(Action):
                             tip = f'{tip}'.rsplit('.', 1)[1]
                             station = f'{station}'.rsplit('.', 1)[1]
                             
-                            dispatcher.utter_message(text=f"The component {component_name} ist part of the {component} which is in {tip} of the {station}.")
-                            return []
-
-            dispatcher.utter_message(text=f"There is no component with the name {component_name}")
-
-        return []
-
-class ActionGetAlarmCylinderLocation(Action):
-    def name(self) -> Text:
-        return "action_utter_alarm_cylinder_location_info"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        component_name = tracker.get_slot('cylinder_which_caused_alarm')
-        #TODO: refactor from done here
-        async with Client(url=url) as client:
-
-            stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
-            stations_node = client.get_node(stations_path)
-            stations = await stations_node.get_children()
-
-            for station in stations:
-                tips = await client.get_node(station).get_children()
-
-                for tip in tips:
-                    components = await client.get_node(f'{tip}' + ".Components").get_children()
-
-                    for component in components:
-                        master_data = client.get_node(f'{component}' + ".MasterData")
-                        equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
-
-                        if component_name == equipment_id_number.lower():
-                            component = f'{component}'.rsplit('.', 1)[1]
-                            tip = f'{tip}'.rsplit('.', 1)[1]
-                            station = f'{station}'.rsplit('.', 1)[1]
-                            
-                            dispatcher.utter_message(text=f"The component {component_name} ist part of the {component} which is in {tip} of the {station}.")
+                            dispatcher.utter_message(text=f"The component {component_name} isd part of the {component} which is in {tip} of the {station}.")
                             return []
 
             dispatcher.utter_message(text=f"There is no component with the name {component_name}")
