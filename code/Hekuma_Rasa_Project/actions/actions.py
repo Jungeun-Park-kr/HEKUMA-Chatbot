@@ -14,7 +14,7 @@ sys.path.append(str(path_root))
 
 from callback_server.server import SubscribeAll
 
-url = "opc.tcp://141.82.144.254:4840"
+url = "opc.tcp://141.82.52.161:4840"
 #url = "opc.tcp://10.0.0.107:4840"
 
 
@@ -161,6 +161,10 @@ class ActionGetComponentLocation(Action):
 
         component_name = next(tracker.get_latest_entity_values("component"), None)
 
+        if component_name is None:
+            print("Rasa could'nt determine any entities!")
+            return []
+
         async with Client(url=url) as client:
 
             stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
@@ -177,7 +181,7 @@ class ActionGetComponentLocation(Action):
                         master_data = client.get_node(f'{component}' + ".MasterData")
                         equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
 
-                        if component_name == equipment_id_number.lower():
+                        if component_name.lower() == equipment_id_number.lower():
                             component = f'{component}'.rsplit('.', 1)[1]
                             tip = f'{tip}'.rsplit('.', 1)[1]
                             station = f'{station}'.rsplit('.', 1)[1]
@@ -199,6 +203,10 @@ class ActionGetAlarmCylinderLocation(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         component_name = tracker.get_slot('component_with_alarm')
+        if component_name is None:
+            print("Rasa could'nt determine any slot with the name: component_with_alarm!")
+            return []
+
         print(component_name)
         #TODO: refactor from done here
         async with Client(url=url) as client:
@@ -208,18 +216,17 @@ class ActionGetAlarmCylinderLocation(Action):
             stations = await stations_node.get_children()
 
             for station in stations:
-                print("1")
                 tips = await client.get_node(station).get_children()
-                print("2")
+
                 for tip in tips:
                     components = await client.get_node(f'{tip}' + ".Components").get_children()
-                    print("3")
+
                     for component in components:
                         master_data = client.get_node(f'{component}' + ".MasterData")
                         equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
-                        print("4")
-                        if component_name == equipment_id_number.lower():
-                            print("5")
+
+                        if component_name.lower() == equipment_id_number.lower():
+                            
                             component = f'{component}'.rsplit('.', 1)[1]
                             tip = f'{tip}'.rsplit('.', 1)[1]
                             station = f'{station}'.rsplit('.', 1)[1]

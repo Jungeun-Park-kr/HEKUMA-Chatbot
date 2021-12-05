@@ -8,6 +8,7 @@ class SubscribeAll():
     async def run(session_id):
         print("Trying to connect to opcua server...")
         client = ClientOld(url='opc.tcp://141.82.52.161:4840')
+        #client = ClientOld(url='opc.tcp://141.82.144.254:4840')
         client.connect()
         print("Connected to opcua server! Trying to grab all the necessary nodes...")
         CylinderNode = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.CylinderAlarm_1.Alarm.Condition.value")
