@@ -52,9 +52,9 @@ class PostAlarmToRasaServer(threading.Thread):
             print("🛑 Clinder Alarm!\n", message)
 
             data = {
-                "name": "warn_external_alarm",
+                "name": "EXTERNAL_warn_cylinder_alarm",
                 "entities": {
-                    "component_with_alarm" : "-Z2.3z2",
+                    "cylinder_with_alarm" : "-Z2.3z2", # TODO: Change to non hardcoded value!
                 }
             }
 
@@ -63,9 +63,9 @@ class PostAlarmToRasaServer(threading.Thread):
             print("🛑 Jamming Material Alarm!\n", message)
 
             data = {
-                "name": "warn_external_alarm",
+                "name": "EXTERNAL_warn_jamming_material_alarm",
                 "entities": {
-                    "component_with_alarm" : "SomeOtherComponent",
+                    "jamming_material_with_alarm" : "SomeOtherComponent", # TODO: Change to non hardcoded value!
                 }
             }
 

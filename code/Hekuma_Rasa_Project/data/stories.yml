@@ -38,11 +38,12 @@ stories:
           - component
       - action: action_utter_supply_component_location_info
 
-  - story: Warn user of an external alarm
+  - story: Warn user of an external cylinder alarm
     steps:
-      - intent: warn_external_alarm
+      - intent: EXTERNAL_warn_cylinder_alarm
         entities:
-          - component_with_alarm
-      - action: utter_warn_alarm
-      - intent: ask_component_with_alarm_location
+          - cylinder_with_alarm
+      - action: utter_warn_cylinder_alarm
+      - intent: ask_cylinder_with_alarm_location_info
       - action: action_utter_supply_alarm_cylinder_location_info
+

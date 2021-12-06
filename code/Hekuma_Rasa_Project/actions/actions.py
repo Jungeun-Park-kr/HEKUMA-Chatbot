@@ -165,33 +165,14 @@ class ActionGetComponentLocation(Action):
             print("Rasa could'nt determine any entities!")
             return []
 
-        async with Client(url=url) as client:
+        result = await get_component_location_from_opcua(component_name)
 
-            stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
-            stations_node = client.get_node(stations_path)
-            stations = await stations_node.get_children()
-
-            for station in stations:
-                tips = await client.get_node(station).get_children()
-
-                for tip in tips:
-                    components = await client.get_node(f'{tip}' + ".Components").get_children()
-
-                    for component in components:
-                        master_data = client.get_node(f'{component}' + ".MasterData")
-                        equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
-
-                        if component_name.lower() == equipment_id_number.lower():
-                            component = f'{component}'.rsplit('.', 1)[1]
-                            tip = f'{tip}'.rsplit('.', 1)[1]
-                            station = f'{station}'.rsplit('.', 1)[1]
-                            
-                            dispatcher.utter_message(text=f"The component {component_name} isd part of the {component} which is in {tip} of the {station}.")
-                            return []
-
+        if result:
+            dispatcher.utter_message(text=f"The component {component_name} ist part of the {result['component']} which is in {result['tip']} of the {result['station']}.")
+            return []
+        else:
             dispatcher.utter_message(text=f"There is no component with the name {component_name}")
-
-        return []
+            return []
 
 
 class ActionGetAlarmCylinderLocation(Action):
@@ -202,38 +183,43 @@ class ActionGetAlarmCylinderLocation(Action):
                   tracker: Tracker,
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        component_name = tracker.get_slot('component_with_alarm')
+        component_name = tracker.get_slot('cylinder_with_alarm')
         if component_name is None:
-            print("Rasa could'nt determine any slot with the name: component_with_alarm!")
+            print("Rasa could'nt determine any slot with the name: cylinder_with_alarm!")
             return []
 
-        print(component_name)
-        #TODO: refactor from done here
-        async with Client(url=url) as client:
+        result = await get_component_location_from_opcua(component_name)
 
-            stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
-            stations_node = client.get_node(stations_path)
-            stations = await stations_node.get_children()
-
-            for station in stations:
-                tips = await client.get_node(station).get_children()
-
-                for tip in tips:
-                    components = await client.get_node(f'{tip}' + ".Components").get_children()
-
-                    for component in components:
-                        master_data = client.get_node(f'{component}' + ".MasterData")
-                        equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
-
-                        if component_name.lower() == equipment_id_number.lower():
-                            
-                            component = f'{component}'.rsplit('.', 1)[1]
-                            tip = f'{tip}'.rsplit('.', 1)[1]
-                            station = f'{station}'.rsplit('.', 1)[1]
-                            
-                            dispatcher.utter_message(text=f"The component {component_name} ist part of the {component} which is in {tip} of the {station}.")
-                            return []
-
+        if result:
+            dispatcher.utter_message(text=f"The component {component_name} ist part of the {result['component']} which is in {result['tip']} of the {result['station']}.")
+            return []
+        else:
             dispatcher.utter_message(text=f"There is no component with the name {component_name}")
+            return []
 
-        return []
+
+async def get_component_location_from_opcua(component_name):
+    async with Client(url=url) as client:
+        stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
+        stations_node = client.get_node(stations_path)
+        stations = await stations_node.get_children()
+
+        for station in stations:
+            tips = await client.get_node(station).get_children()
+            for tip in tips:
+                components = await client.get_node(f'{tip}' + ".Components").get_children()
+                for component in components:
+                    master_data = client.get_node(f'{component}' + ".MasterData")
+                    equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
+                    if component_name.lower() == equipment_id_number.lower():
+
+                        component = f'{component}'.rsplit('.', 1)[1]
+                        tip = f'{tip}'.rsplit('.', 1)[1]
+                        station = f'{station}'.rsplit('.', 1)[1]
+                        return {
+                              "component": component,
+                              "tip": tip,
+                              "station": station
+                            }
+        
+        return False
