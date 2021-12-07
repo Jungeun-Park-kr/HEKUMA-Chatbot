@@ -47,6 +47,7 @@ class PostAlarmToRasaServer(threading.Thread):
         url = f'http://localhost:5005/conversations/{self.session_id}/trigger_intent?output_channel=latest'
         data = {}
         message = self.node.get_parent().get_child("1:active_message").get_value().Text
+        cylinder_name = self.node.get_parent().get_parent().get_child("1:variable").get_value().Value
 
         if "CylinderAlarm" in self.node.nodeid.to_string():
             print("🛑 Clinder Alarm!\n", message)
@@ -54,7 +55,8 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "EXTERNAL_warn_cylinder_alarm",
                 "entities": {
-                    "cylinder_with_alarm" : "-Z2.3z2", # TODO: Change to non hardcoded value!
+                    "cylinder_with_alarm" : cylinder_name, # TODO: Change to non hardcoded value!
+                    "alarm_message" : message, # get the alarm message from server
                 }
             }
 
@@ -65,10 +67,9 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "EXTERNAL_warn_jamming_material_alarm",
                 "entities": {
-                    "jamming_material_with_alarm" : "SomeOtherComponent", # TODO: Change to non hardcoded value!
+                    "alarm_message" : message, # get the alarm message from server
                 }
             }
-
         else:
             print("An event happened which is not defined! Stopping callback server!")
             raise SystemExit

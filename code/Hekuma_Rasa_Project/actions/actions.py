@@ -156,8 +156,8 @@ class ActionGetComponentLocation(Action):
         return "action_utter_supply_component_location_info"
 
     async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         component_name = next(tracker.get_latest_entity_values("component"), None)
 
@@ -180,8 +180,8 @@ class ActionGetAlarmCylinderLocation(Action):
         return "action_utter_supply_alarm_cylinder_location_info"
 
     async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         component_name = tracker.get_slot('cylinder_with_alarm')
         if component_name is None:
@@ -223,3 +223,78 @@ async def get_component_location_from_opcua(component_name):
                             }
         
         return False
+
+class ActionUtterWarnCylinderAlarm(Action):
+    def name(self) -> Text:
+        return "action_utter_warn_cylinder_alarm"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+                alarm_message = next(tracker.get_latest_entity_values("alarm_message"), None)
+                message = "Attention!\n" + alarm_message
+                dispatcher.utter_message(text=message)
+                return[]
+                
+class ActionUtterWarnJammingMaterialAlarm(Action):
+    def name(self) -> Text:
+        return "action_utter_warn_jamming_material_alarm"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+                alarm_message = next(tracker.get_latest_entity_values("alarm_message"), None)
+                message = "Alarm!\n" + alarm_message
+                dispatcher.utter_message(text=message)
+                return[]
+
+class ActionHowToFixJammingMaterialAlarm(Action):
+    def name(self) -> Text:
+        return "action_how_to_fix_jamming_material_alarm"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+                async with Client(url=url) as client:
+                    # get the solution from opcua server
+                    solution = await client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.JammingMaterialAlarm.Alarm.solution_info").get_value()
+                    dispatcher.utter_message(text=solution)
+                return[]
+
+class ActionOpenSafetyDoor(Action):
+    def name(self) -> Text:
+        return "action_open_safety_door"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+                door_number = next(tracker.get_latest_entity_values("door_number"), None)
+                if door_number is None:
+                    dispatcher.utter_message("Door number is missing. Just try again")
+                else :
+                    async with Client(url=url) as client:
+
+                        safety_zones_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.SafetyZones"
+                        safety_zones_node = client.get_node(safety_zones_path)
+                        safety_zones = await safety_zones_node.get_children()
+
+                        for zone in safety_zones:
+
+                            safety_doors = await client.get_node(zone).get_children()
+
+                            for door in safety_doors:
+                                if f'{door}'.rsplit('_', 1)[1] == door_number:
+                                    door_state = client.get_node(f'{door}' + ".isOpen")
+                                    door_value = await client.get_node(f'{door}' + ".isOpen").read_value()
+                                    if door_value is False:
+                                        await door_state.write_value(True)
+                                        message = "Safety door "+door_number+" is opened"
+                                        dispatcher.utter_message(text=message)
+                                    else:
+                                        message = "Safety door "+door_number+" is already opened"
+                                        dispatcher.utter_message(text=message)
+                return[]

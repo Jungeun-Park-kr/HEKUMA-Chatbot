@@ -36,12 +36,6 @@ nlu:
     examples: |
       - Is there an alarm?
 
-  - intent: ask_how_to_fix
-    examples: |
-      - How to fix this problem and bringing machine up?
-      - How to fix the machine?
-      - How can I solve it?
-
   - intent: affirm
     examples: |
       - yes
@@ -85,3 +79,27 @@ nlu:
       - Where is the component?
       - Where is this component?
       - Where is the location of this part?
+
+  - intent: ask_how_to_fix_jamming_material_alarm
+    examples: |
+      - How to fix this problem and bringing machine up?
+      - How to solve it?
+      - What is the solution of this problem?
+      - How to fix the machine?
+      - How can I solve it?
+
+  - intent: EXTERNAL_warn_jamming_material_alarm
+    examples: |
+      - Attention! [Jamming of material in "+TIP1".](alarm_message)
+      - Alarm! [Jamming of material in "+TIP2".](alarm_message)
+
+  - intent: EXTERNAL_warn_cylinder_alarm
+    examples: |
+      - Attention! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
+      - Alarm! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
+  
+  - intent: ask_open_safety_door
+    examples: |
+      - Open safety door [3](door_number)
+      - Can you open safety door [2](door_number)?
+      - I want to open safety door [1](door_number)

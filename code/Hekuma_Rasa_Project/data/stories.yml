@@ -43,7 +43,23 @@ stories:
       - intent: EXTERNAL_warn_cylinder_alarm
         entities:
           - cylinder_with_alarm
-      - action: utter_warn_cylinder_alarm
+          - alarm_message
+      - action: action_utter_warn_cylinder_alarm
       - intent: ask_cylinder_with_alarm_location_info
       - action: action_utter_supply_alarm_cylinder_location_info
 
+  - story: Warn user of an external jamming material alarm
+    steps:
+      - intent: EXTERNAL_warn_jamming_material_alarm
+        entities:
+          - alarm_message
+      - action: action_utter_warn_jamming_material_alarm
+      - intent: ask_how_to_fix_jamming_material_alarm 
+      - action: action_how_to_fix_jamming_material_alarm # (in first, create folder and value in Opc ua server), and get from it
+
+  - story: Open the safety door
+    steps:
+      - intent: ask_open_safety_door
+        entities:
+          - door_number
+      - action: action_open_safety_door
