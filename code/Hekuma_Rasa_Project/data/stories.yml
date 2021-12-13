@@ -63,3 +63,21 @@ stories:
         entities:
           - door_number
       - action: action_open_safety_door
+
+  - story: check faulty module and restart
+    steps:
+      - intent: restart_specific
+        entities:
+         - module_number
+      - action: action_utter_supply_module_specific_info
+      - intent: affirm
+      - action: action_restart_faulty_module
+
+  - story: check faulty module
+    steps:
+      - intent: restart_specific
+        entities:
+         - module_number
+      - action: action_utter_supply_module_specific_info
+      - intent: deny
+ 
