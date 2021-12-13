@@ -58,11 +58,6 @@ nlu:
       - Restart module!
       - Restart
 
-  - intent: restart_specific
-    examples: |
-      - Restart [6](module_number)
-      - Restart [23](module_number), now!
-
   - intent: ask_conversationID
     examples: |
       - What is the conversation id?
@@ -103,3 +98,10 @@ nlu:
       - Open safety door [3](door_number)
       - Can you open safety door [2](door_number)?
       - I want to open safety door [1](door_number)
+
+  - intent: restart_specific
+    examples: |
+      - Restart [tip number](module_number)
+      - Restart [TIP1](module_number)
+      - Restart [tip number](module_number), now!
+      - Restart [TIP1](module_number), now!
