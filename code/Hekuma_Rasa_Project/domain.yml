@@ -60,6 +60,11 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
+  module_number:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
   component:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -125,5 +130,7 @@ actions:
 - action_utter_warn_jamming_material_alarm
 - action_how_to_fix_jamming_material_alarm
 - action_open_safety_door
+- action_utter_supply_module_specific_info
+- action_restart_faulty_module
 forms: {}
 e2e_actions: []
