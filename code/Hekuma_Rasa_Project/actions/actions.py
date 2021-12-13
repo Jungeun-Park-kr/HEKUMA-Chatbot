@@ -298,3 +298,51 @@ class ActionOpenSafetyDoor(Action):
                                         message = "Safety door "+door_number+" is already opened"
                                         dispatcher.utter_message(text=message)
                 return[]
+
+class ActionInfoRestartModuleSpecific(Action):
+    
+    def name(self) -> Text:
+        return "action_utter_supply_module_specific_info"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]: #TODO: check if domain necessary
+
+        module_number = next(tracker.get_latest_entity_values("module_number"), None)
+
+        async with Client(url=url) as client:
+            
+            acp = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.JammingMaterialAlarm.Alarm.Condition.value")
+            
+            module_status=await acp.read_value()
+
+            if module_status: # True:faulty module
+                dispatcher.utter_message(text=f"Do you want to restart faulty module {module_number}?") 
+            else : 
+                dispatcher.utter_message(text=f"Module {module_number} isn't a faulty module")
+            
+        return []
+
+
+class ActionRestartFaultyModule(Action):
+    
+    def name(self) -> Text:
+        return "action_restart_faulty_module"
+
+    async def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]: #TODO: check if domain necessary
+
+        module_number = next(tracker.get_latest_entity_values("module_number"), None)
+
+        async with Client(url=url) as client:
+            
+            acb = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.JammingMaterialAlarm.Alarm.Condition.value")
+            
+            module_status=await acb.read_value()
+
+            if module_status: # True:faulty module
+                await acb.write_value(False)
+                dispatcher.utter_message(text=f"Module restarted") 
+            
+        return []
