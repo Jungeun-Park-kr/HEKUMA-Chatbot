@@ -197,33 +197,6 @@ class ActionGetAlarmCylinderLocation(Action):
             dispatcher.utter_message(text=f"There is no component with the name {component_name}")
             return []
 
-
-async def get_component_location_from_opcua(component_name):
-    async with Client(url=url) as client:
-        stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
-        stations_node = client.get_node(stations_path)
-        stations = await stations_node.get_children()
-
-        for station in stations:
-            tips = await client.get_node(station).get_children()
-            for tip in tips:
-                components = await client.get_node(f'{tip}' + ".Components").get_children()
-                for component in components:
-                    master_data = client.get_node(f'{component}' + ".MasterData")
-                    equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
-                    if component_name.lower() == equipment_id_number.lower():
-
-                        component = f'{component}'.rsplit('.', 1)[1]
-                        tip = f'{tip}'.rsplit('.', 1)[1]
-                        station = f'{station}'.rsplit('.', 1)[1]
-                        return {
-                              "component": component,
-                              "tip": tip,
-                              "station": station
-                            }
-        
-        return False
-
 class ActionUtterWarnCylinderAlarm(Action):
     def name(self) -> Text:
         return "action_utter_warn_cylinder_alarm"
@@ -346,3 +319,31 @@ class ActionRestartFaultyModule(Action):
                 dispatcher.utter_message(text=f"Module restarted") 
             
         return []
+
+
+
+async def get_component_location_from_opcua(component_name):
+    async with Client(url=url) as client:
+        stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
+        stations_node = client.get_node(stations_path)
+        stations = await stations_node.get_children()
+
+        for station in stations:
+            tips = await client.get_node(station).get_children()
+            for tip in tips:
+                components = await client.get_node(f'{tip}' + ".Components").get_children()
+                for component in components:
+                    master_data = client.get_node(f'{component}' + ".MasterData")
+                    equipment_id_number = await client.get_node(f'{master_data}' + ".equipmentIdNumber").read_value()
+                    if component_name.lower() == equipment_id_number.lower():
+
+                        component = f'{component}'.rsplit('.', 1)[1]
+                        tip = f'{tip}'.rsplit('.', 1)[1]
+                        station = f'{station}'.rsplit('.', 1)[1]
+                        return {
+                              "component": component,
+                              "tip": tip,
+                              "station": station
+                            }
+        
+        return False
