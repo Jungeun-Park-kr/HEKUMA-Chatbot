@@ -1,8 +1,15 @@
+"""[summary]
+
+"""
+
 from opcua import Client as ClientOld, Node
 import threading
-import requests # https://www.geeksforgeeks.org/get-post-requests-using-python/
+import requests
 
 
+"""[summary]
+
+"""
 class SubscribeAll():
 
     async def run(session_id):
@@ -27,6 +34,9 @@ class SubscribeAll():
         print("Waiting for events...")
 
 
+"""[summary]
+
+"""
 class SubscriptionHandler():
     def __init__(self, session_id):
         self.session_id = session_id
@@ -37,6 +47,9 @@ class SubscriptionHandler():
             t.start()                    
 
 
+"""[summary]
+
+"""
 class PostAlarmToRasaServer(threading.Thread):
     def __init__(self, node, session_id):
         super().__init__()
@@ -55,8 +68,8 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "EXTERNAL_warn_cylinder_alarm",
                 "entities": {
-                    "cylinder_with_alarm" : cylinder_name, # TODO: Change to non hardcoded value!
-                    "alarm_message" : message, # get the alarm message from server
+                    "cylinder_with_alarm" : cylinder_name,
+                    "alarm_message" : message,
                 }
             }
 
@@ -67,7 +80,7 @@ class PostAlarmToRasaServer(threading.Thread):
             data = {
                 "name": "EXTERNAL_warn_jamming_material_alarm",
                 "entities": {
-                    "alarm_message" : message, # get the alarm message from server
+                    "alarm_message" : message,
                 }
             }
         else:

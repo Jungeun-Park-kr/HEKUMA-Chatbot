@@ -1,12 +1,15 @@
+"""[summary]
+This files contains your custom actions which can be used to run custom Python code.
+"""
+
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, EventType
-
-# Add codes for using OPCUA
+from rasa_sdk.events import SessionStarted, ActionExecuted
 from asyncua import Client
 
+# The next 4 lines are needed if you have problems impoirting the server.py in callback_server
 from pathlib import Path
 import sys
 path_root = Path(__file__).parents[2]
@@ -14,10 +17,14 @@ sys.path.append(str(path_root))
 
 from callback_server.server import SubscribeAll
 
+# This should point to the ip address of the opc ua (atvise) server
 url = "opc.tcp://141.82.52.161:4840"
 #url = "opc.tcp://10.0.0.107:4840"
 
 
+"""[summary]
+
+"""
 class ActionSessionStart(Action):
 
     def name(self) -> Text:
@@ -38,6 +45,9 @@ class ActionSessionStart(Action):
         return events
 
 
+"""[summary]
+
+"""
 class ActionMyFirstBoolean(Action):
 
     def name(self) -> Text:
@@ -54,6 +64,9 @@ class ActionMyFirstBoolean(Action):
         return []
 
 
+"""[summary]
+
+"""
 class ActionSafetyDoor(Action):
 
     def name(self) -> Text:
@@ -94,23 +107,9 @@ class ActionSafetyDoor(Action):
         return []
 
 
-class ActionTellID(Action):
-    """Informs the user about the conversation ID."""
+"""[summary]
 
-    def name(self) -> Text:
-        return "action_tell_id"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-
-        conversation_id = tracker.sender_id
-
-        dispatcher.utter_message(f"The ID of this conversation is '{conversation_id}'.")
-        
-        return []
-
-
+"""
 class ActionComponentLastChanged(Action):
 
     # When was the coil roll changed last time?
@@ -147,6 +146,9 @@ class ActionComponentLastChanged(Action):
         return []
 
 
+"""[summary]
+
+"""
 class ActionGetComponentLocation(Action):
 
     # Where is component [-Z2.3z2](component)?
@@ -175,6 +177,9 @@ class ActionGetComponentLocation(Action):
             return []
 
 
+"""[summary]
+
+"""
 class ActionGetAlarmCylinderLocation(Action):
     def name(self) -> Text:
         return "action_utter_supply_alarm_cylinder_location_info"
@@ -197,6 +202,10 @@ class ActionGetAlarmCylinderLocation(Action):
             dispatcher.utter_message(text=f"There is no component with the name {component_name}")
             return []
 
+
+"""[summary]
+
+"""
 class ActionUtterWarnCylinderAlarm(Action):
     def name(self) -> Text:
         return "action_utter_warn_cylinder_alarm"
@@ -209,7 +218,11 @@ class ActionUtterWarnCylinderAlarm(Action):
                 message = "Attention!\n" + alarm_message
                 dispatcher.utter_message(text=message)
                 return[]
-                
+
+
+"""[summary]
+
+"""
 class ActionUtterWarnJammingMaterialAlarm(Action):
     def name(self) -> Text:
         return "action_utter_warn_jamming_material_alarm"
@@ -223,6 +236,10 @@ class ActionUtterWarnJammingMaterialAlarm(Action):
                 dispatcher.utter_message(text=message)
                 return[]
 
+
+"""[summary]
+
+"""
 class ActionHowToFixJammingMaterialAlarm(Action):
     def name(self) -> Text:
         return "action_how_to_fix_jamming_material_alarm"
@@ -237,6 +254,10 @@ class ActionHowToFixJammingMaterialAlarm(Action):
                     dispatcher.utter_message(text=solution)
                 return[]
 
+
+"""[summary]
+
+"""
 class ActionOpenSafetyDoor(Action):
     def name(self) -> Text:
         return "action_open_safety_door"
@@ -272,6 +293,10 @@ class ActionOpenSafetyDoor(Action):
                                         dispatcher.utter_message(text=message)
                 return[]
 
+
+"""[summary]
+
+"""
 class ActionInfoRestartModuleSpecific(Action):
     
     def name(self) -> Text:
@@ -297,6 +322,9 @@ class ActionInfoRestartModuleSpecific(Action):
         return []
 
 
+"""[summary]
+
+"""
 class ActionRestartFaultyModule(Action):
     
     def name(self) -> Text:
@@ -321,7 +349,11 @@ class ActionRestartFaultyModule(Action):
         return []
 
 
+"""[summary]
 
+[returns]
+
+"""
 async def get_component_location_from_opcua(component_name):
     async with Client(url=url) as client:
         stations_path = "ns=1;s=" + "AGENT.OBJECTS.Machine.Stations"
