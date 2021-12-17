@@ -1,16 +1,17 @@
 version: "2.0"
 
+######################################################################################
+# Stories are a type of training data used to train your assistant's dialogue
+# management model. Stories can be used to train models that are able to generalize
+# to unseen conversation paths.
+#
+# -> https://rasa.com/docs/rasa/stories/
+######################################################################################
 stories:
   - story: happy path
     steps:
       - intent: greet
       - action: utter_greet
-
-  - story: MyFirstBoolean
-    steps:
-      - intent: my_firstboolean_info
-      - action: action_utter_supply_myfirstboolean_info
-      - action: utter_action_MyFirstBoolean_completed
 
   - story: check if the safety door is open or closed
     steps:
@@ -26,39 +27,6 @@ stories:
           - component
       - action: action_utter_supply_component_last_changed_info
 
-
-  - story : ask for session id 
-    steps: 
-      - intent: ask_conversationID
-      - action: action_tell_id
-
-
-  - story: Cylinder alarm
-    steps: 
-      - intent: EXTERNAL_alarm_cylinder_alarm
-      - action: utter_warn_cylinder_alarm
-      - intent: ask_cylinder_location
-      #- action: utter_cylinder_location
-
-
-# - story: react to JammingMaterialAlarm 
-#   steps:
-#   #TODO: Make bot say something if there is a JammingMaterialAlarm
-#     - intent: ask_alarm
-#     - action : action_utter_supply_alarm
-#     - intent : ask_how_to_fix
-#     #make utter_answer_fix
-#     - action : utter_ask_fix
-#     #change state of ???
-#     - action : utter_result_fix
-#     #from this part on it depends on Andreas how to implement it
-#     - intent: restart
-#     - action: utter_restart
-#     - intent: affirm
-#     - action: utter_info_button
-#     - intent: restart_specific 
-#     - action: utter_restart_specific 
-
   - story: Supply user with the location of the component
     steps:
       - intent: ask_component_location_info
@@ -66,3 +34,45 @@ stories:
           - component
       - action: action_utter_supply_component_location_info
 
+  - story: Warn user of an external cylinder alarm
+    steps:
+      - intent: EXTERNAL_warn_cylinder_alarm
+        entities:
+          - cylinder_with_alarm
+          - alarm_message
+      - action: action_utter_warn_cylinder_alarm
+      - intent: ask_cylinder_with_alarm_location_info
+      - action: action_utter_supply_alarm_cylinder_location_info
+
+  - story: Warn user of an external jamming material alarm
+    steps:
+      - intent: EXTERNAL_warn_jamming_material_alarm
+        entities:
+          - alarm_message
+      - action: action_utter_warn_jamming_material_alarm
+      - intent: ask_how_to_fix_jamming_material_alarm
+      - action: action_how_to_fix_jamming_material_alarm
+
+  - story: Open the safety door
+    steps:
+      - intent: ask_open_safety_door
+        entities:
+          - door_number
+      - action: action_open_safety_door
+
+  - story: check faulty module and restart
+    steps:
+      - intent: restart_specific
+        entities:
+          - module_number
+      - action: action_utter_supply_module_specific_info
+      - intent: affirm
+      - action: action_restart_faulty_module
+
+  - story: check faulty module
+    steps:
+      - intent: restart_specific
+        entities:
+          - module_number
+      - action: action_utter_supply_module_specific_info
+      - intent: deny

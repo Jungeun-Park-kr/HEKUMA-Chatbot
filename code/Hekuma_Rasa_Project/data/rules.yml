@@ -1,13 +1,15 @@
 version: "2.0"
 
-rules:
-# Example:
-# - rule: Say goodbye anytime the user says goodbye
-#   steps:
-#   - intent: goodbye
-#   - action: utter_goodbye
+######################################################################################
+# Rules are a type of training data used to train your assistant's dialogue 
+# management model. Rules describe short pieces of conversations that should 
+# always follow the same path.
+# 
+# -> https://rasa.com/docs/rasa/rules/
+######################################################################################
 
-  - rule: warn about cylinder alarm
+rules:
+  - rule: conversation initializer
     steps:
-    - intent: EXTERNAL_alarm_cylinder_alarm
-    - action: utter_warn_cylinder_alarm
+      - intent: session_start
+      - action: action_session_start

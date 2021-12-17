@@ -1,5 +1,16 @@
 version: "2.0"
 
+######################################################################################
+# NLU training data stores structured information about user messages.
+# The goal of NLU (Natural Language Understanding) is to extract structured
+# information from user messages. This usually includes the user's intent and
+# any entities their message contains. You can add extra information such as
+# regular expressions and lookup tables to your training data to help the model
+# identify intents and entities correctly.
+#
+# -> https://rasa.com/docs/rasa/nlu-training-data/
+######################################################################################
+
 nlu:
   - intent: greet
     examples: |
@@ -17,11 +28,6 @@ nlu:
       - goodevening
       - good afternoon
 
-  - intent: my_firstboolean_info
-    examples: |
-      - What's the value of MyFirstBoolean?
-      - MyFirstBoolean
-
   - intent: ask_safety_door_info
     examples: |
       - Is safety door [6](door_number) closed?
@@ -32,16 +38,9 @@ nlu:
       - When was the [coil roll](component) changed the last time?
       - When was the [part x](component) changed the last time?
 
-
-  - intent: ask_alarm 
+  - intent: ask_alarm
     examples: |
       - Is there an alarm?
-
-  - intent: ask_how_to_fix 
-    examples: |
-      - How to fix this problem and bringing machine up?
-      - How to fix the machine?
-      - How can I solve it?
 
   - intent: affirm
     examples: |
@@ -63,24 +62,48 @@ nlu:
   - intent: restart
     examples: |
       - Restart module!
-      - Restart 
+      - Restart
 
-  - intent: restart_specific 
-    examples: |
-      - Restart [6](module_number)
-      - Restart [23](module_number), now!
-
-  - intent: ask_conversationID
-    examples: |
-      - What is the conversation id?
-
-  - intent: ask_cylinder_location
-    examples: |
-      - Where is this cylinder located?
-      - What is the location of this cylinder?
-    
   - intent: ask_component_location_info
     examples: |
       - Where is component [-Z2.3z2](component)?
       - Where is component [-Z3.3z2](component)?
+      - Where is component [part x](component)?
+      - Where is component [coil roll](component)?
 
+  - intent: ask_cylinder_with_alarm_location_info
+    examples: |
+      - Where is the component?
+      - Where is this component?
+      - Where is the location of this part?
+
+  - intent: ask_how_to_fix_jamming_material_alarm
+    examples: |
+      - How to fix this problem and bringing machine up?
+      - How to solve it?
+      - What is the solution of this problem?
+      - How to fix the machine?
+      - How can I solve it?
+
+  - intent: EXTERNAL_warn_jamming_material_alarm
+    examples: |
+      - Attention! [Jamming of material in "+TIP1".](alarm_message)
+      - Alarm! [Jamming of material in "+TIP2".](alarm_message)
+
+  - intent: EXTERNAL_warn_cylinder_alarm
+    examples: |
+      - Attention! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
+      - Alarm! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
+
+  - intent: ask_open_safety_door
+    examples: |
+      - Open safety door [3](door_number)
+      - Can you open safety door [2](door_number)?
+      - I want to open safety door [1](door_number)
+
+  - intent: restart_specific
+    examples: |
+      - Restart [tip number](module_number)
+      - Restart [TIP1](module_number)
+      - Restart [tip number](module_number), now!
+      - Restart [TIP1](module_number), now!

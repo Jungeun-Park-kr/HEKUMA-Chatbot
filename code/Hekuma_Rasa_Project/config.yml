@@ -1,22 +1,63 @@
 language: en
+######################################################################################
+# In Rasa Open Source, incoming messages are processed by a sequence of components. 
+# These components are executed one after another in a so-called processing pipeline 
+# Choosing an NLU pipeline allows you to customize your 
+# model and finetune it on your dataset.
+#
+# -> https://rasa.com/docs/rasa/tuning-your-model/
+######################################################################################
 pipeline:
-  - name: WhitespaceTokenizer
+  - name: "SpacyNLP"
+    # language model to load
+    model: "en_core_web_sm"
+
+    # when retrieving word vectors, this will decide if the casing
+    # of the word is relevant. E.g. `hello` and `Hello` will
+    # retrieve the same vector, if set to `False`. For some
+    # applications and models it makes sense to differentiate
+    # between these two words, therefore setting this to `True`.
+    case_sensitive: False
+
+  - name: "SpacyTokenizer"
+    # Flag to check whether to split intents
+    "intent_tokenization_flag": False
+    # Symbol on which intent should be split
+    "intent_split_symbol": "_"
+    # Regular expression to detect tokens
+    "token_pattern": None
+
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
-    analyzer: "char_wb"
+    analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
     epochs: 100
+    constrain_similarities: true
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier
+    threshold: 0.3
+    ambiguity_threshold: 0.1
 
+######################################################################################
+# Your assistant uses policies to decide which action to take at each 
+# step in a conversation. There are machine-learning and rule-based 
+# policies that your assistant can use in tandem.
+# There are different policies to choose from, and you can include multiple policies 
+# in a single configuration.
+# 
+# -> https://rasa.com/docs/rasa/policies/
+######################################################################################
 policies:
   - name: MemoizationPolicy
   - name: RulePolicy
   - name: TEDPolicy
     max_history: 5
     epochs: 100
+    constrain_similarities: true
