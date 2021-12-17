@@ -1,4 +1,12 @@
 language: en
+######################################################################################
+# In Rasa Open Source, incoming messages are processed by a sequence of components. 
+# These components are executed one after another in a so-called processing pipeline 
+# Choosing an NLU pipeline allows you to customize your 
+# model and finetune it on your dataset.
+#
+# -> https://rasa.com/docs/rasa/tuning-your-model/
+######################################################################################
 pipeline:
   - name: "SpacyNLP"
     # language model to load
@@ -10,7 +18,7 @@ pipeline:
     # applications and models it makes sense to differentiate
     # between these two words, therefore setting this to `True`.
     case_sensitive: False
-  #- name: WhitespaceTokenizer
+
   - name: "SpacyTokenizer"
     # Flag to check whether to split intents
     "intent_tokenization_flag": False
@@ -37,6 +45,15 @@ pipeline:
     threshold: 0.3
     ambiguity_threshold: 0.1
 
+######################################################################################
+# Your assistant uses policies to decide which action to take at each 
+# step in a conversation. There are machine-learning and rule-based 
+# policies that your assistant can use in tandem.
+# There are different policies to choose from, and you can include multiple policies 
+# in a single configuration.
+# 
+# -> https://rasa.com/docs/rasa/policies/
+######################################################################################
 policies:
   - name: MemoizationPolicy
   - name: RulePolicy

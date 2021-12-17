@@ -1,16 +1,17 @@
 version: "2.0"
 
+######################################################################################
+# Stories are a type of training data used to train your assistant's dialogue
+# management model. Stories can be used to train models that are able to generalize
+# to unseen conversation paths.
+#
+# -> https://rasa.com/docs/rasa/stories/
+######################################################################################
 stories:
   - story: happy path
     steps:
       - intent: greet
       - action: utter_greet
-
-  - story: MyFirstBoolean
-    steps:
-      - intent: my_firstboolean_info
-      - action: action_utter_supply_myfirstboolean_info
-      - action: utter_action_MyFirstBoolean_completed
 
   - story: check if the safety door is open or closed
     steps:
@@ -25,12 +26,6 @@ stories:
         entities:
           - component
       - action: action_utter_supply_component_last_changed_info
-
-  #delete
-  - story: ask for session id
-    steps:
-      - intent: ask_conversationID
-      - action: action_tell_id
 
   - story: Supply user with the location of the component
     steps:
@@ -55,7 +50,7 @@ stories:
         entities:
           - alarm_message
       - action: action_utter_warn_jamming_material_alarm
-      - intent: ask_how_to_fix_jamming_material_alarm 
+      - intent: ask_how_to_fix_jamming_material_alarm
       - action: action_how_to_fix_jamming_material_alarm
 
   - story: Open the safety door
@@ -69,7 +64,7 @@ stories:
     steps:
       - intent: restart_specific
         entities:
-         - module_number
+          - module_number
       - action: action_utter_supply_module_specific_info
       - intent: affirm
       - action: action_restart_faulty_module
@@ -78,7 +73,6 @@ stories:
     steps:
       - intent: restart_specific
         entities:
-         - module_number
+          - module_number
       - action: action_utter_supply_module_specific_info
       - intent: deny
- 

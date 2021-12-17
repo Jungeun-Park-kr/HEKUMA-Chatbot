@@ -1,21 +1,15 @@
 version: "2.0"
 
+######################################################################################
+# Rules are a type of training data used to train your assistant's dialogue 
+# management model. Rules describe short pieces of conversations that should 
+# always follow the same path.
+# 
+# -> https://rasa.com/docs/rasa/rules/
+######################################################################################
+
 rules:
   - rule: conversation initializer
     steps:
       - intent: session_start
       - action: action_session_start
-
-#  - rule: Warn user of an external alarm
-#    steps:
-#      - intent: warn_external_alarm
-#        entities:
-#          - component
-#      - action: utter_warn_alarm
-#
-#  - rule: Supply user with the location of the component
-#    steps:
-#      - intent: ask_component_location_info
-#        entities:
-#          - component
-#      - action: action_utter_supply_component_location_info

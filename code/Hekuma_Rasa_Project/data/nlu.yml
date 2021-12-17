@@ -1,5 +1,16 @@
 version: "2.0"
 
+######################################################################################
+# NLU training data stores structured information about user messages.
+# The goal of NLU (Natural Language Understanding) is to extract structured
+# information from user messages. This usually includes the user's intent and
+# any entities their message contains. You can add extra information such as
+# regular expressions and lookup tables to your training data to help the model
+# identify intents and entities correctly.
+#
+# -> https://rasa.com/docs/rasa/nlu-training-data/
+######################################################################################
+
 nlu:
   - intent: greet
     examples: |
@@ -16,11 +27,6 @@ nlu:
       - goodmorning
       - goodevening
       - good afternoon
-
-  - intent: my_firstboolean_info
-    examples: |
-      - What's the value of MyFirstBoolean?
-      - MyFirstBoolean
 
   - intent: ask_safety_door_info
     examples: |
@@ -58,10 +64,6 @@ nlu:
       - Restart module!
       - Restart
 
-  - intent: ask_conversationID
-    examples: |
-      - What is the conversation id?
-
   - intent: ask_component_location_info
     examples: |
       - Where is component [-Z2.3z2](component)?
@@ -92,7 +94,7 @@ nlu:
     examples: |
       - Attention! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
       - Alarm! [Cylinder -Z3.3z2 haven't reached working position!](alarm_message)
-  
+
   - intent: ask_open_safety_door
     examples: |
       - Open safety door [3](door_number)
