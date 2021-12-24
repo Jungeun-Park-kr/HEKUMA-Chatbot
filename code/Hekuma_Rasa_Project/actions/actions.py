@@ -9,7 +9,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SessionStarted, ActionExecuted
 from asyncua import Client
 
-# The next 4 lines are needed if you have problems impoirting the server.py in callback_server
+# The next 4 lines are needed if you have problems importing the handler.py in opcua_server
 from pathlib import Path
 import sys
 path_root = Path(__file__).parents[2]
@@ -23,7 +23,9 @@ url = "opc.tcp://141.82.52.161:4840"
 
 
 """[summary]
-
+ActionSessionStart is a default rasa action which is always called when a new conversation starts.
+By defining the action in the actions.py we override this actions and adjust it to our needs.
+What we added is the async SubscribeAll call which subscribe to all alarm nodes defined on the opcua atvise server.
 """
 class ActionSessionStart(Action):
 
@@ -46,26 +48,12 @@ class ActionSessionStart(Action):
 
 
 """[summary]
+This action gets called on the question if a certain door is closed or not.
 
-"""
-class ActionMyFirstBoolean(Action):
+use case example:
 
-    def name(self) -> Text:
-        return "action_utter_supply_myfirstboolean_info"
-
-    async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        async with Client(url=url) as client:
-            var = client.get_node("ns=1;s=AGENT.OBJECTS.MyFirstBoolean")
-            dispatcher.utter_message(text=f"Value of my MyFirstBoolean is {await var.read_value()}")
-
-        return []
-
-
-"""[summary]
-
+User: Is safety door 1 closed?
+Bot: Safety door 1 is currently unlocked.
 """
 class ActionSafetyDoor(Action):
 
@@ -108,12 +96,14 @@ class ActionSafetyDoor(Action):
 
 
 """[summary]
+This action gets called on the question when was a component changed the last time
 
+use case example:
+
+User: When was the coil roll cahnged the last time?
+Bot: The coil roll was last changed today at 2:35 pm, i.e. 2 hours and 20 minutes ago.
 """
 class ActionComponentLastChanged(Action):
-
-    # When was the coil roll changed last time?
-    # The coil roll was last changed today at 2:35 pm, i.e. 2hrs and 2min ago
 
     def name(self) -> Text:
         return "action_utter_supply_component_last_changed_info"
@@ -147,12 +137,14 @@ class ActionComponentLastChanged(Action):
 
 
 """[summary]
+This action gets called on the question where a certain component is located
 
+use case example:
+
+User: Where is component -Z2.3z2?
+Bot: The component -Z2.3z2 ist part of the coil roll which is in tip1 of the clamping station.
 """
 class ActionGetComponentLocation(Action):
-
-    # Where is component [-Z2.3z2](component)?
-    # Component is in...
 
     def name(self) -> Text:
         return "action_utter_supply_component_location_info"
@@ -178,7 +170,7 @@ class ActionGetComponentLocation(Action):
 
 
 """[summary]
-
+Very similar to ActionGetComponentLocation but this operated on slots instead of entities.
 """
 class ActionGetAlarmCylinderLocation(Action):
     def name(self) -> Text:
@@ -204,7 +196,8 @@ class ActionGetAlarmCylinderLocation(Action):
 
 
 """[summary]
-
+This action gets called on the intent EXTERNAL_warn_cylinder_alarm which is called in the handler.py
+This just prints an alarm message to our console
 """
 class ActionUtterWarnCylinderAlarm(Action):
     def name(self) -> Text:
@@ -221,7 +214,8 @@ class ActionUtterWarnCylinderAlarm(Action):
 
 
 """[summary]
-
+This action gets called on the intent EXTERNAL_warn_jamming_material_alarm which is called in the handler.py
+This just prints an alarm message to our console
 """
 class ActionUtterWarnJammingMaterialAlarm(Action):
     def name(self) -> Text:
@@ -238,7 +232,8 @@ class ActionUtterWarnJammingMaterialAlarm(Action):
 
 
 """[summary]
-
+This action gets called after we asked the machine how to fix the current occured problem. We
+get the solution from a opcua server node. 
 """
 class ActionHowToFixJammingMaterialAlarm(Action):
     def name(self) -> Text:
@@ -256,7 +251,8 @@ class ActionHowToFixJammingMaterialAlarm(Action):
 
 
 """[summary]
-
+This action gets called if we demanded to open a certain door. We check if this door exists and if the 
+door is closed we then open it by changing a value on the opcua server
 """
 class ActionOpenSafetyDoor(Action):
     def name(self) -> Text:
@@ -295,7 +291,13 @@ class ActionOpenSafetyDoor(Action):
 
 
 """[summary]
+This action gets called after we demanded a restart of a specific module. 
+We check here if the module is faulty and if so we then get asked for confirmation.
 
+use case example:
+
+Bot: Do you want to restart the faulty module „+TIP1“?
+User: Yes
 """
 class ActionInfoRestartModuleSpecific(Action):
     
@@ -304,7 +306,7 @@ class ActionInfoRestartModuleSpecific(Action):
 
     async def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]: #TODO: check if domain necessary
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         module_number = next(tracker.get_latest_entity_values("module_number"), None)
 
@@ -323,7 +325,8 @@ class ActionInfoRestartModuleSpecific(Action):
 
 
 """[summary]
-
+This action is the followup to the action ActionInfoRestartModuleSpecific. Here we actually resart the module
+by changing a value on the opcua server.
 """
 class ActionRestartFaultyModule(Action):
     
@@ -332,9 +335,7 @@ class ActionRestartFaultyModule(Action):
 
     async def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]: #TODO: check if domain necessary
-
-        module_number = next(tracker.get_latest_entity_values("module_number"), None)
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         async with Client(url=url) as client:
             
@@ -350,9 +351,11 @@ class ActionRestartFaultyModule(Action):
 
 
 """[summary]
+This function gets the location from the opcua server by searching all station subfolders for the component we 
+look for and then return on a hit all parent folders the component is actually located.
 
 [returns]
-
+dict with three components: component, tip, station
 """
 async def get_component_location_from_opcua(component_name):
     async with Client(url=url) as client:
