@@ -108,3 +108,14 @@ virtual environment with
    
    If rasa x is still not opening the ui then try deleting the events*-files + rasa.db file
    
+
+
+##  How to start the project?
+
+To start the project you go to your installation directory and enter your created virutal environment
+and then you type:
+
+```rasa run actions```   # to start the action server + opcua handler
+
+```rasa x```   # to start the rasa x ui
+
