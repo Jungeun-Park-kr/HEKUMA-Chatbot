@@ -1,32 +1,34 @@
 """[summary]
-
+This file runs with the actions code. Here we basically subscribe to some atvise (opcua) nodes which can give us an alarm and
+ff an alarm occurs then we also handle it in here.
 """
 
-from opcua import Client as ClientOld, Node
+from opcua import Client as Client, Node
 import threading
 import requests
 
+url='opc.tcp://141.82.52.161:4840'
 
 """[summary]
-
+SubscribeAll gets called in actions.py when a new conversation is started. We connect here to the opcua server
+get certain alarm nodes and subscribe to these alarm nodes.
 """
 class SubscribeAll():
 
     async def run(session_id):
         print("Trying to connect to opcua server...")
-        client = ClientOld(url='opc.tcp://141.82.52.161:4840')
-        #client = ClientOld(url='opc.tcp://141.82.144.254:4840')
+        client = Client(url=url)
         client.connect()
         print("Connected to opcua server! Trying to grab all the necessary nodes...")
-        CylinderNode = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.CylinderAlarm_1.Alarm.Condition.value")
-        JammingNode = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.JammingMaterialAlarm.Alarm.Condition.value")
+        cylinder_node = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.CylinderAlarm_1.Alarm.Condition.value")
+        jamming_node = client.get_node("ns=1;s=AGENT.OBJECTS.Machine.Alarms.General.JammingMaterialAlarm.Alarm.Condition.value")
         print("We got all nodes! Subscibe to handlers...")
         handler = SubscriptionHandler(session_id) 
         # We create a Client Subscription.
         subscription = client.create_subscription(500, handler)
         nodes = [
-            CylinderNode,
-            JammingNode
+            cylinder_node,
+            jamming_node
         ]
         # We subscribe to data changes for two nodes (variables).
         subscription.subscribe_data_change(nodes)
@@ -35,7 +37,8 @@ class SubscribeAll():
 
 
 """[summary]
-
+The datachange notification gets called, when a change in a node we subscribed to is found.
+When in the subscribed node the alarm value is set to true we call PostAlarmToRasaServer.
 """
 class SubscriptionHandler():
     def __init__(self, session_id):
@@ -48,7 +51,8 @@ class SubscriptionHandler():
 
 
 """[summary]
-
+This gets called when an alarm on the opcua server occurs. When this happens we get the alarm message and the faulty part name
+of the alarmed node from the opcua server and then notify tis alarm to our rasa server with a post message.
 """
 class PostAlarmToRasaServer(threading.Thread):
     def __init__(self, node, session_id):

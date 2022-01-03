@@ -155,7 +155,6 @@ responses:
 
 actions:
     - action_session_start
-    - action_utter_supply_myfirstboolean_info
     - action_utter_supply_safety_door_info
     - action_utter_supply_alarm
     - action_utter_supply_component_last_changed_info
