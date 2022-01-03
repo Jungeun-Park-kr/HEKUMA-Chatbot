@@ -8,8 +8,13 @@ version: "2.0"
 # -> https://rasa.com/docs/rasa/rules/
 ######################################################################################
 
+
+
 rules:
+# Triggers Custom Action Session start at the beginning of every(!) conversation -> actions.py
   - rule: conversation initializer
     steps:
+    # session_start is no ordinary intent, it is automatically triggered in the beginning of
+    # every conversation by Rasa.
       - intent: session_start
       - action: action_session_start
