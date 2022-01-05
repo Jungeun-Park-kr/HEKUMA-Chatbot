@@ -144,38 +144,50 @@ and physical manufacturing systems cooperate with each other in a flexible way o
 (Pistorius, 2020, p.5). There are many virtual assistants on the market for home automation and personal tasks. (Petrock, 2020)
 The motivation of our project was to also explore the chances of voice assistants for Industry 4.0.
 
+This project is a cooperation between the Hekuma GmbH and the University of Applied Science Augsburg.
+
 }
 
+
+%%%%%%%%%%%%goal
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Architecture}{name=architecture,column=0,span=1,below=problem}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The design of our concept is based around the Rasa framework. 
+Rasa was chosen amongst other reasons for the fact that it can run locally on the machine without needing to have an internet connection. 
+With a very limited amount of training data in form the form of classified example sentences, 
+Rasa makes it very easy to analyze intents, extract entities and connect them to answers or possible actions. 
+These actions are defined through Rasa Actions and make it possible for us to attach our chatbot to an industrial machine.
+As we were only supposed to develop a prototype, the industrial machine in our case is only represented by an ativse server. 
+It contains information about the state of an imaginary machine, with alarm values and other important operating information. 
+Changing values on this atvise server does, at this stage, not lead to any changes on a real machine. But it was incredibly useful for prototyping. 
+The atvise server exchanges data with our Rasa actions server through OPC UA. OPC UA is a machine to machine communication protocol.
+Therefore, our Rasa actions server needs to understand this form of communication. Which was made possible by using the library opcua-asyncio.
+opcua-asyncio is a Python 3 library and worked perfectly well with our actions Rasa actions server, which also needs to be written in Python. 
 
 
 \blindtext
 
 \begin{center}
-	\includegraphics[width=0.8\linewidth]{design_of_project_concept}
+	\includegraphics[width=0.8\linewidth]{images/design_of_project_concept.png}
 \end{center}
 
 \blindtext[2]
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Details}{name=details,column=1,span=1,row=0, below=introduction}{
+  \headerbox{Details}{name=details,column=1,span=1,row=0, below=problem}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+To go further into detail, concerning the exact process of a chatbot interaction, one can have a look at the following sequence diagram.
 \begin{center}
-	\includegraphics[width=0.35\linewidth]{example-image-b}
+	\includegraphics[width=0.35\linewidth]{images/sequence_diagram.jpg}
 \end{center}
-
-\blindtext
-
-\begin{center}
-	\includegraphics[width=0.35\linewidth]{example-image-c}
-\end{center}
-
-\blindtext
+In this example a worker wants to know the state of a safety door on the machine. 
+They input their command through Rasa X which is a chat UI already integrated into Rasa. 
+The different components integrated into Rasa then take over and deciphers the user’s intent and extracts the exact door number. 
+Next Rasa actions contacts the atvise server to find out about the specified safety door state. 
+Finally the answer is passed back to the worker.
 
 }
 
@@ -183,11 +195,29 @@ The motivation of our project was to also explore the chances of voice assistant
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Results}{name=results,column=1,span=1,below=details}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+The talking machines team was able to implement the following use cases.
+Simple state requests:
+\begin{center}
+	\includegraphics[width=0.35\linewidth]{images/use_case_1.jpg}
+\end{center}
+Proactive communication, optional continuations and processing contextual information:
+\begin{center}
+	\includegraphics[width=0.35\linewidth]{images/use_case_2.jpg}
+\end{center}
+Proactive communication and processing contextual information:
+\begin{center}
+	\includegraphics[width=0.35\linewidth]{images/use_case_3.jpg}
+\end{center}
 }
 \headerbox{Outlook}{name=outlook,column=1,span=1,below=results}{
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  Next steps for the project could be implementing this prototype on a real Hekuma machine. 
+  This would mean instead of just flipping values on the atvise server, interaction with the chatbot could move actual machine parts. 
+  Implementation of this would need an adaption of the current implementation to the specific machine. 
+  For example, you would need to verify if information about the state of the machine is structured in a similar way as it is on our atvise server model. 
+  Still, the overall architecture of the prototype would make this possible, as it is tightly fitted to the requirements of a Hekuma machine. 
+  Further, the prototype is effortlessly expandable. A variety of a new use cases can easily be implemented.  
+
     }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,7 +229,6 @@ The motivation of our project was to also explore the chances of voice assistant
     \begin{enumerate}
       \item Petrock. (2020)  \emph{Voice Assistant and Smart Speaker Users 2020}. eMarketer. https://www.emarketer.com/content/voice-assistant-and-smart-speaker-users-2020#page-report
       \item Pistorius, J. (2020) \emph{Industrie 4.0 – vierte industrielle Revolution.} Springer Vieweg
-      \item Etc.
     \end{enumerate}
     
    \vspace{0.3em}
