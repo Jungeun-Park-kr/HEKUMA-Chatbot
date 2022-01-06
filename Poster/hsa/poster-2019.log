@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.12.15)  15 DEC 2021 16:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.12.15)  6 JAN 2022 10:47
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **poster-2019.tex
 (./poster-2019.tex
@@ -447,8 +447,8 @@ File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 Paperwidth=1195.01575pt
 Paperheight=1690.09369pt
-BasePaperwidth=657.2623pt
-BasePaperheight=929.55669pt
+BasePaperwidth=1039.65785pt
+BasePaperheight=1470.37325pt
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -826,15 +826,15 @@ ABD: EveryShipout initializing macros
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(23.47363pt, 610.31503pt, 23.47363pt)
-* v-part:(T,H,B)=(23.47363pt, 882.60942pt, 23.47363pt)
-* \paperwidth=657.2623pt
-* \paperheight=929.55669pt
-* \textwidth=610.31503pt
-* \textheight=882.60942pt
-* \oddsidemargin=-48.79636pt
-* \evensidemargin=-48.79636pt
-* \topmargin=-85.79636pt
+* h-part:(L,W,R)=(37.13062pt, 965.39662pt, 37.13062pt)
+* v-part:(T,H,B)=(37.13062pt, 1396.11201pt, 37.13062pt)
+* \paperwidth=1039.65785pt
+* \paperheight=1470.37325pt
+* \textwidth=965.39662pt
+* \textheight=1396.11201pt
+* \oddsidemargin=-35.13937pt
+* \evensidemargin=-35.13937pt
+* \topmargin=-72.13937pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -862,11 +862,12 @@ babelbib extension \bibsenglish added to \extrasenglish
 babelbib extension \btxifchangecaseon added to \extrasamerican
 babelbib extension \btxifchangecaseon added to \extrasenglish
 )
-<example-image.pdf, id=29, 321.2pt x 240.9pt>
-File: example-image.pdf Graphic file (type pdf)
-<use example-image.pdf>
-Package pdftex.def Info: example-image.pdf  used on input line 127.
-(pdftex.def)             Requested size: 66.6649pt x 50.0pt.
+<images/talking_machines_logo.png, id=29, 5139.2pt x 2890.8pt>
+File: images/talking_machines_logo.png Graphic file (type png)
+<use images/talking_machines_logo.png>
+Package pdftex.def Info: images/talking_machines_logo.png  used on input line 1
+27.
+(pdftex.def)             Requested size: 88.84734pt x 50.0pt.
 <images/hsa_logo_normal.jpg, id=30, 2758.305pt x 1671.24374pt>
 File: images/hsa_logo_normal.jpg Graphic file (type jpg)
 <use images/hsa_logo_normal.jpg>
@@ -883,7 +884,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 127
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 14
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 15
 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
@@ -892,60 +893,100 @@ File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-<example-image-a.pdf, id=31, 321.2pt x 240.9pt>
-File: example-image-a.pdf Graphic file (type pdf)
-<use example-image-a.pdf>
-Package pdftex.def Info: example-image-a.pdf  used on input line 158.
-(pdftex.def)             Requested size: 232.12689pt x 174.09848pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-<example-image-b.pdf, id=32, 321.2pt x 240.9pt>
-File: example-image-b.pdf Graphic file (type pdf)
-<use example-image-b.pdf>
-Package pdftex.def Info: example-image-b.pdf  used on input line 176.
-(pdftex.def)             Requested size: 101.5569pt x 76.16693pt.
-<example-image-c.pdf, id=33, 321.2pt x 240.9pt>
-File: example-image-c.pdf Graphic file (type pdf)
-<use example-image-c.pdf>
-Package pdftex.def Info: example-image-c.pdf  used on input line 176.
-(pdftex.def)             Requested size: 101.5569pt x 76.16693pt.
+<images/design_of_project_concept.png, id=31, 4465.68375pt x 1835.35687pt>
+File: images/design_of_project_concept.png Graphic file (type png)
+<use images/design_of_project_concept.png>
+Package pdftex.def Info: images/design_of_project_concept.png  used on input li
+ne 192.
+(pdftex.def)             Requested size: 374.16006pt x 153.77686pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
+<images/sequence_diagram.jpg, id=33, 943.72575pt x 331.83975pt>
+File: images/sequence_diagram.jpg Graphic file (type jpg)
+<use images/sequence_diagram.jpg>
+Package pdftex.def Info: images/sequence_diagram.jpg  used on input line 207.
+(pdftex.def)             Requested size: 163.69725pt x 57.55635pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
+<images/use_case_1.jpg, id=34, 787.743pt x 344.487pt>
+File: images/use_case_1.jpg Graphic file (type jpg)
+<use images/use_case_1.jpg>
+Package pdftex.def Info: images/use_case_1.jpg  used on input line 226.
+(pdftex.def)             Requested size: 163.69725pt x 71.58221pt.
+<images/use_case_2.jpg, id=35, 595.023pt x 411.939pt>
+File: images/use_case_2.jpg Graphic file (type jpg)
+<use images/use_case_2.jpg>
+Package pdftex.def Info: images/use_case_2.jpg  used on input line 226.
+(pdftex.def)             Requested size: 163.69725pt x 113.32442pt.
+<images/use_case_3.jpg, id=36, 752.8125pt x 199.34476pt>
+File: images/use_case_3.jpg Graphic file (type jpg)
+<use images/use_case_3.jpg>
+Package pdftex.def Info: images/use_case_3.jpg  used on input line 226.
+(pdftex.def)             Requested size: 163.69725pt x 43.34496pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
+<images/multi_lang.png, id=37, 475.02469pt x 206.27063pt>
+File: images/multi_lang.png Graphic file (type png)
+<use images/multi_lang.png>
+Package pdftex.def Info: images/multi_lang.png  used on input line 243.
+(pdftex.def)             Requested size: 163.69725pt x 71.0816pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
- [2
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 258.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </usr/share/texlive/texmf-d
-ist/tex/latex/mwe/example-image.pdf> <./images/hsa_logo_normal.jpg> </usr/share
-/texlive/texmf-dist/tex/latex/mwe/example-image-a.pdf> </usr/share/texlive/texm
-f-dist/tex/latex/mwe/example-image-b.pdf> </usr/share/texlive/texmf-dist/tex/la
-tex/mwe/example-image-c.pdf>] (./poster-2019.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 258--258
+[]\T1/phv/m/n/8 Market Re-search Fu-ture. (2021, Oc-to-ber). \T1/phv/m/sl/8 Voi
+ce As-sis-tant Mar-ket Size, Share Fore-cast 2027\T1/phv/m/n/8 .
+ []
+
+! You can't use `macro parameter character #' in horizontal mode.
+<argument> ...stant-and-smart-speaker-users-2020##
+                                                  page-report \item Pistoriu...
+l.258 }
+       
+? 
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+[2
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/talking_machines_
+logo.png (PNG copy)> <./images/hsa_logo_normal.jpg> <./images/design_of_project
+_concept.png> <./images/sequence_diagram.JPG> <./images/use_case_1.JPG> <./imag
+es/use_case_2.JPG> <./images/use_case_3.JPG> <./images/multi_lang.png>]
+(./poster-2019.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 17894 strings out of 483130
- 361149 string characters out of 5963882
- 762561 words of memory out of 5000000
- 32531 multiletter control sequences out of 15000+600000
- 556849 words of font info for 61 fonts, out of 8000000 for 9000
+ 18087 strings out of 483130
+ 364987 string characters out of 5963882
+ 773567 words of memory out of 5000000
+ 32714 multiletter control sequences out of 15000+600000
+ 559865 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,11n,75p,413b,1058s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-di
-st/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/fonts/type1/public/lm/lmss17.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on poster-2019.pdf (1 page, 787281 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palati
+no/uplr8a.pfb>
+Output written on poster-2019.pdf (1 page, 2824435 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 63 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
