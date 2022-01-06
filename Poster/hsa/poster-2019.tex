@@ -137,22 +137,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Motivation}{name=problem,column=0,row=0}{
+\headerbox{Motivation / State of the Art}{name=problem,column=0,row=0}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Today we are in the fourth industrial revolution or also known as Industry 4.0, where virtual 
 and physical manufacturing systems cooperate with each other in a flexible way on a global level 
-(Pistorius, 2020, p.5). There are many virtual assistants on the market for home automation and personal tasks. (Petrock, 2020)
-The motivation of our project was to also explore the chances of voice assistants for Industry 4.0.
-
-This project is a cooperation between the Hekuma GmbH and the University of Applied Science Augsburg.
+(Pistorius, 2020, p.5). 
+Meanwhile the recent advancements in AI offer significant chances for the improvement and extended use 
+of virtual assistants. As it is the base for natural language processing (NLP), 
+a key technology part of chatbots utilized to understand the human language (Market Research Future, 2021).
+There are many virtual assistants on the market for home automation and personal tasks (Petrock, 2020).
+But the global voice assistant market is still expected to grow significantly in the next 5 years. 
+One of the key drivers in Europe being the adaption of
+voice-based-solutions in the industrial sector (Market Research Future, 2021). 
 
 }
 
 
-%%%%%%%%%%%%goal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Goal}{name=goal,column=0,row=0, below=problem}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Our project aimed to explore the chances of voice assistants for Industry 4.0 in HEKUMA machines, 
+as this project is industry cooperation between the HEKUMA GmbH and the HSA. 
+The HEKUMA GmbH is a leading special machine construction company from the Munich area. 
+The overall goal was archived by first researching the state of the art, 
+evaluating different approaches, and then choosing a fitting framework for a future prototype. 
+Next the architecture of that said prototype was designed and later implemented. 
+During this process we oriented ourselves on, example conversations provided by the HEKUMA GmbH. 
+Adapted versions of those can be seen in the “Results” section below.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Architecture}{name=architecture,column=0,span=1,below=problem}{
+\headerbox{Architecture}{name=architecture,column=0,span=1,below=goal}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The design of our concept is based around the Rasa framework. 
 Rasa was chosen amongst other reasons for the fact that it can run locally on the machine without needing to have an internet connection. 
@@ -195,7 +210,7 @@ Finally the answer is passed back to the worker.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Results}{name=results,column=1,span=1,below=details}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The talking machines team was able to implement the following use cases.
+The talking machines team was able to implement the following use cases in English.
 Simple state requests:
 \begin{center}
 	\includegraphics[width=0.35\linewidth]{images/use_case_1.jpg}
@@ -209,6 +224,8 @@ Proactive communication and processing contextual information:
 	\includegraphics[width=0.35\linewidth]{images/use_case_3.jpg}
 \end{center}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Outlook}{name=outlook,column=1,span=1,below=results}{
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   Next steps for the project could be implementing this prototype on a real Hekuma machine. 
@@ -218,7 +235,12 @@ Proactive communication and processing contextual information:
   Still, the overall architecture of the prototype would make this possible, as it is tightly fitted to the requirements of a Hekuma machine. 
   Further, the prototype is effortlessly expandable. A variety of a new use cases can easily be implemented.  
 
-    }
+  A completely new feature to implement, could be multilingualism. We already developed a draft 
+  for this during our time on the project, having a separate NLU for each desired language, as shown in the image. 
+  \begin{center}
+    \includegraphics[width=0.35\linewidth]{images/multi_lang.png}
+  \end{center}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \headerbox{References}{name=references,column=1,span=1,below=outlook}{
@@ -227,6 +249,7 @@ Proactive communication and processing contextual information:
     \bibliographystyle{ieee}
     
     \begin{enumerate}
+      \item Market Research Future. (2021, October). \emph{Voice Assistant Market Size, Share Forecast 2027}. https://www.marketresearchfuture.com/reports/voice-assistant-market-4003
       \item Petrock. (2020)  \emph{Voice Assistant and Smart Speaker Users 2020}. eMarketer. https://www.emarketer.com/content/voice-assistant-and-smart-speaker-users-2020#page-report
       \item Pistorius, J. (2020) \emph{Industrie 4.0 – vierte industrielle Revolution.} Springer Vieweg
     \end{enumerate}
