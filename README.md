@@ -7,7 +7,7 @@ This is the repository of the project group chatbots 2021
 | Name | E-Mail |
 |-----------|-----------|
 | Saliu Bah | Saliu.Bah@HS-Augsburg.DE |
-| Cristina Vizan Olmedo | - |
+| Cristina Vizan Olmedo | Cristina.Vizan.Olmedo@HS-Augsburg.DE |
 | Jung Eun Park | - |
 | Marco Lenz | Marco.Lenz@HS-Augsburg.DE |
 
