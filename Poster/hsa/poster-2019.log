@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.12.15)  6 JAN 2022 17:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.12.15)  21 JAN 2022 17:13
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -447,8 +447,8 @@ File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 Paperwidth=1195.01575pt
 Paperheight=1690.09369pt
-BasePaperwidth=944.05441pt
-BasePaperheight=1335.16266pt
+BasePaperwidth=1015.77068pt
+BasePaperheight=1436.58995pt
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -826,15 +826,15 @@ ABD: EveryShipout initializing macros
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(33.71622pt, 876.62198pt, 33.71622pt)
-* v-part:(T,H,B)=(33.71622pt, 1267.73022pt, 33.71622pt)
-* \paperwidth=944.05441pt
-* \paperheight=1335.16266pt
-* \textwidth=876.62198pt
-* \textheight=1267.73022pt
-* \oddsidemargin=-38.55377pt
-* \evensidemargin=-38.55377pt
-* \topmargin=-75.55377pt
+* h-part:(L,W,R)=(36.27751pt, 943.21565pt, 36.27751pt)
+* v-part:(T,H,B)=(36.27751pt, 1364.03493pt, 36.27751pt)
+* \paperwidth=1015.77068pt
+* \paperheight=1436.58995pt
+* \textwidth=943.21565pt
+* \textheight=1364.03493pt
+* \oddsidemargin=-35.99248pt
+* \evensidemargin=-35.99248pt
+* \topmargin=-72.99248pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -885,25 +885,22 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 126
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for T1+phv on input line 15
-3.
+9.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 153--153
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--153
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
 
  []
 
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--168
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
 
  []
 
@@ -911,12 +908,25 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
+
+ []
+
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
 
  []
 
@@ -924,57 +934,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--189
 File: images/design_of_project_concept.png Graphic file (type png)
 <use images/design_of_project_concept.png>
 Package pdftex.def Info: images/design_of_project_concept.png  used on input li
-ne 189.
-(pdftex.def)             Requested size: 402.14413pt x 173.2576pt.
+ne 199.
+(pdftex.def)             Requested size: 433.77603pt x 186.88097pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 <images/sequence_diagram.jpg, id=33, 969.6225pt x 388.45125pt>
 File: images/sequence_diagram.jpg Graphic file (type jpg)
 <use images/sequence_diagram.jpg>
-Package pdftex.def Info: images/sequence_diagram.jpg  used on input line 206.
-(pdftex.def)             Requested size: 423.31099pt x 169.59135pt.
+Package pdftex.def Info: images/sequence_diagram.jpg  used on input line 216.
+(pdftex.def)             Requested size: 456.60782pt x 182.92773pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--226
+Underfull \hbox (badness 10000) in paragraph at lines 236--236
 
  []
 
 <images/use_case_1.jpg, id=34, 611.28375pt x 280.6485pt>
 File: images/use_case_1.jpg Graphic file (type jpg)
 <use images/use_case_1.jpg>
-Package pdftex.def Info: images/use_case_1.jpg  used on input line 226.
-(pdftex.def)             Requested size: 359.81691pt x 165.19576pt.
+Package pdftex.def Info: images/use_case_1.jpg  used on input line 236.
+(pdftex.def)             Requested size: 388.11943pt x 178.1884pt.
 <images/use_case_2.jpg, id=35, 536.0025pt x 383.031pt>
 File: images/use_case_2.jpg Graphic file (type jpg)
 <use images/use_case_2.jpg>
-Package pdftex.def Info: images/use_case_2.jpg  used on input line 226.
-(pdftex.def)             Requested size: 359.81691pt x 257.12622pt.
+Package pdftex.def Info: images/use_case_2.jpg  used on input line 236.
+(pdftex.def)             Requested size: 388.11943pt x 277.34845pt.
 <images/use_case_3.jpg, id=36, 616.10175pt x 159.59625pt>
 File: images/use_case_3.jpg Graphic file (type jpg)
 <use images/use_case_3.jpg>
-Package pdftex.def Info: images/use_case_3.jpg  used on input line 226.
-(pdftex.def)             Requested size: 359.81691pt x 93.20634pt.
+Package pdftex.def Info: images/use_case_3.jpg  used on input line 236.
+(pdftex.def)             Requested size: 388.11943pt x 100.53885pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--244
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--244
+Underfull \hbox (badness 10000) in paragraph at lines 254--254
 
  []
 
 <images/multi_lang.png, id=37, 475.02469pt x 206.27063pt>
 File: images/multi_lang.png Graphic file (type png)
 <use images/multi_lang.png>
-Package pdftex.def Info: images/multi_lang.png  used on input line 244.
-(pdftex.def)             Requested size: 338.65007pt x 147.05746pt.
+Package pdftex.def Info: images/multi_lang.png  used on input line 254.
+(pdftex.def)             Requested size: 365.28764pt x 158.62428pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -982,9 +992,9 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 271.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 281.
 
-Underfull \hbox (badness 3428) in paragraph at lines 271--271
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
 []\T1/phv/m/n/8 Market Re-search Fu-ture. (2021, Oc-to-ber). \T1/phv/m/sl/8 Voi
 ce As-sis-tant Mar-ket Size, Share Fore-cast 2027\T1/phv/m/n/8 .
  []
@@ -992,15 +1002,9 @@ ce As-sis-tant Mar-ket Size, Share Fore-cast 2027\T1/phv/m/n/8 .
 ! You can't use `macro parameter character #' in horizontal mode.
 <argument> ...stant-and-smart-speaker-users-2020##
                                                   page-report \item Pistoriu...
-l.271 }
+l.281 }
        
 ? 
-
-Underfull \hbox (badness 10000) in paragraph at lines 271--271
-[]\T1/phv/m/n/8 Petrock. (2020) \T1/phv/m/sl/8 Voice As-sis-tant and Smart Spea
-ker Users 2020\T1/phv/m/n/8 . eMar-keter.
- []
-
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -1014,7 +1018,7 @@ es/use_case_2.JPG> <./images/use_case_3.JPG> <./images/multi_lang.png>]
 Here is how much of TeX's memory you used:
  18087 strings out of 483130
  364994 string characters out of 5963882
- 770564 words of memory out of 5000000
+ 772567 words of memory out of 5000000
  32714 multiletter control sequences out of 15000+600000
  559865 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1024,7 +1028,7 @@ Here is how much of TeX's memory you used:
 /texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/palatino/uplr8a.pfb>
-Output written on poster-2019.pdf (1 page, 2820115 bytes).
+Output written on poster-2019.pdf (1 page, 2820512 bytes).
 PDF statistics:
  63 PDF objects out of 1000 (max. 8388607)
  29 compressed objects within 1 object stream

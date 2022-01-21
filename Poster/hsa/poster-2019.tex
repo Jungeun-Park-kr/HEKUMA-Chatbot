@@ -1,5 +1,5 @@
 % !TeX spellcheck = de_DE
-\documentclass[portrait,final,a2paper,fontscale=0.79]{baposter}
+\documentclass[portrait,final,a2paper,fontscale=0.85]{baposter}
 
 %
 % TODO: You may use fontscale to adjust the font size so that the poster fills the whole page.
@@ -139,22 +139,22 @@
 \headerbox{Motivation / State of the Art}{name=problem,column=0,row=0}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Today we are in the fourth industrial revolution or also known as Industry 4.0, where virtual 
-and physical manufacturing systems cooperation intensifies on a global level 
+and physical manufacturing system's cooperation intensifies on a global level 
 (Pistorius, 2020, p.5). \\
 
-In the field of computer science, the recent advancements in AI offer significant chances for the improvement and extended use 
-of smart assistants. As it is the basis for natural language processing (NLP), 
-a key technology part of chatbots utilized to understand the human language (Market Research Future, 2021).\\
+In the field of computer science, recent advancements in AI offer significant chances for the improvement and extended use 
+of smart assistants, because AI is the basis for natural language processing (NLP).
+And NLP is a key technology in chatbots, as it is used to make the chatbot understand the human language (Market Research Future, 2021).\\
 
 There are many smart assistants on the market for home automation and personal tasks (Petrock, 2020). 
 But the global smart assistant market is still expected to grow significantly in the next 5 years. 
 One of the key drivers in Europe for this development is the adaptation of smart-assistant-based-solutions
 in the industrial sector (Market Research Future, 2021).\\
 
-A smart assistant integrated in a special machines would provide the great benefit of an actor being able 
+A smart assistant integrated in a special machine would provide the great benefit of an actor being able 
 to intuitively obtain information from the machine. 
-There is no need for a special training concerning the machine’s interface, 
-as the actor-machine-interaction would play out similar to an ordinary everyday human to human interaction. 
+There would be no need for a special training concerning the machine’s interface, 
+as the actor-to-machine-interaction would play out similar to an ordinary everyday human-to-human-interaction. 
 
 }
 
@@ -163,8 +163,8 @@ as the actor-machine-interaction would play out similar to an ordinary everyday 
 \headerbox{Goal}{name=goal,column=0,row=0, below=problem}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Our project aimed to explore the chances of smart assistants for Industry 4.0 in HEKUMA machines, 
-as this project is an industry cooperation between the HEKUMA GmbH and the HSA. 
-The HEKUMA GmbH is a leading special machine construction company from the Munich area. \\
+as this project was an industry cooperation between the HEKUMA GmbH and the HSA. 
+HEKUMA is a leading special machine construction company from the Munich area. \\
 
 The question was to be answered if and how actors in a factory can intuitively request information from a
 machine by interacting with the machines through a smart assistant.
@@ -173,26 +173,26 @@ machine by interacting with the machines through a smart assistant.
 This was examined by first researching the state of the art, 
 evaluating different approaches, and then choosing a fitting framework for a future prototype. 
 Next the architecture of that said prototype was designed and later implemented. 
-During this process we oriented ourselves on, example conversations provided by the HEKUMA GmbH. 
-Adapted versions of those can be seen in the “Results” section below.
+During this process we oriented ourselves on example conversations provided by the HEKUMA GmbH. 
+Adapted versions of those example conversations can be seen in the “Results” section below.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Architecture}{name=architecture,column=0,span=1,below=goal}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The design of our concept is based around the Rasa framework. 
-Rasa was chosen amongst other reasons for the fact that it can run locally on the machine without needing to have an internet connection. 
+Rasa was chosen, amongst other reasons, due to the fact that it can run locally on the machine without needing to have an internet connection. 
 With a very limited amount of training data in the form of classified example sentences, 
-Rasa makes it very easy to analyze intents, extract entities and connect them to answers or possible actions. 
-These actions are defined through Rasa Actions and make it possible for us to attach our chatbot to an industrial machine. \\
+Rasa makes it very easy to analyze intents, extract entities and connect them to answers or potential actions. 
+Actions are defined through Rasa Actions and make it possible for us to attach our chatbot to an industrial machine. \\
 
-As we were only supposed to develop a prototype, the industrial machine in our case is only represented by an ativse server. 
+As we were only supposed to develop a prototype, the industrial machine in our case is represented by an ativse server. 
 It contains information about the state of an imaginary machine, with alarm values and other important operating information. 
-Changing values on this atvise server does, at this stage, not lead to any changes on a real machine. But it was incredibly useful for prototyping. \\
+Changing values on this atvise server does, at this stage, not lead to any changes on a real machine. But it was still incredibly useful for prototyping. \\
 
-The atvise server exchanges data with our Rasa actions server through OPC UA. OPC UA is a machine to machine communication protocol.
-Therefore, our Rasa actions server needs to understand this form of communication. This was made possible by using the library opcua-asyncio.
-opcua-asyncio is a Python 3 library and worked perfectly well with our actions Rasa actions server, which also needs to be written in Python. 
+As said, the atvise server exchanges data with our Rasa actions server through OPC UA. OPC UA is a machine to machine communication protocol.
+Therefore, our Rasa actions server needed to understand this form of communication. This was made possible by using the library opcua-asyncio.
+opcua-asyncio is a Python 3 library and worked perfectly well with our Rasa actions server, which was required to be written in Python. 
 \begin{center}
 	\includegraphics[width=0.95\linewidth]{images/design_of_project_concept.png}
 \end{center}
@@ -201,16 +201,16 @@ opcua-asyncio is a Python 3 library and worked perfectly well with our actions R
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Details}{name=details,column=0, below=architecture}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-To go further into detail, concerning the exact process of a chatbot interaction, one can have a look at the following sequence diagram.
+In order to further understand the exact process of a chatbot interaction, one can have a look at the following sequence diagram.
 
 \begin{center}
 	\includegraphics[width=1\linewidth]{images/sequence_diagram.jpg}
 \end{center}
 
 In this example a worker wants to know the state of a safety door on the machine. 
-They input their command through Rasa X which is a chat UI already integrated into Rasa. 
-The different components integrated into Rasa then take over and deciphers the user’s intent and extracts the exact door number. 
-Next Rasa actions contacts the atvise server to find out about the specified safety door state. 
+They input their command through Rasa X which is a chat UI that is shipped with Rasa. 
+The different components integrated into Rasa then take over and decipher the user’s intent and extract the exact door number. 
+Next Rasa actions contacts the atvise server to find out about the specified safety door's state. 
 Finally, the answer is passed back to the worker.
 
 }
@@ -219,7 +219,7 @@ Finally, the answer is passed back to the worker.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Results}{name=results,column=1,span=1}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The talking machines team was able to implement the following use cases in English. \\
+The talking machines team was able to implement the following use cases in English: \\
 
 Simple state requests:
 \begin{center}
@@ -238,16 +238,16 @@ Proactive communication and processing contextual information:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Outlook}{name=outlook,column=1,span=1,below=results}{
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  Next steps for the project could be implementing this prototype on a real Hekuma machine. 
-  This would mean instead of just flipping values on the atvise server, interaction with the chatbot could move actual machine parts. 
-  Implementation of this would require an adaptation of the current implementation to the specific machine. 
-  For example, you would need to verify if information about the state of the machine is structured in a similar way as it is on our atvise server model. 
-  Still, the overall architecture of the prototype would make this possible, as it is tightly fitted to the requirements of a Hekuma machine. \\
+  A possible next step in the project could be an implementation of our prototype, running on a real Hekuma machine. 
+  This would mean, instead of just flipping values on an atvise server, interaction with the chatbot would move real machine parts. 
+  Of course the realisation of this implementation could require some adjustments to our code. For example, you would need to verify if information about 
+  the state of the machine is structured in a similar way as it is in our atvise server model. 
+  Still, the overall architecture of the prototype would make those adjustments very lightweight, as it is tightly fitted to the requirements of a Hekuma machine. \\
 
-  Further, the prototype is effortlessly expandable. A variety of a new use cases can easily be implemented. \\
+  Further, the prototype is effortlessly expandable. A variety of new use cases can easily be implemented. \\
 
-  A completely new feature to implement, could be multilingualism. We already developed a draft 
-  for this during our time on the project, having a separate NLU for each desired language, as shown in the image. 
+  A completely new feature could be multilingualism. We already developed a draft 
+  for this during our time on the project. The draft foresees a separate NLU for each desired language, as shown in the image. 
   \begin{center}
     \includegraphics[width=0.8\linewidth]{images/multi_lang.png}
   \end{center}
