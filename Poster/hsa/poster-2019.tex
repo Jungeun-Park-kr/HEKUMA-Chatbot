@@ -190,9 +190,9 @@ As we were only supposed to develop a prototype, the industrial machine in our c
 It contains information about the state of an imaginary machine, with alarm values and other important operating information. 
 Changing values on this atvise server does, at this stage, not lead to any changes on a real machine. But it was still incredibly useful for prototyping. \\
 
-As said, the atvise server exchanges data with our Rasa actions server through OPC UA. OPC UA is a machine to machine communication protocol.
-Therefore, our Rasa actions server needed to understand this form of communication. This was made possible by using the library opcua-asyncio.
-opcua-asyncio is a Python 3 library and worked perfectly well with our Rasa actions server, which was required to be written in Python. 
+As said, the atvise server exchanges data with our Rasa Actions server through OPC UA. OPC UA is a machine to machine communication protocol.
+Therefore, our Rasa Actions server needed to understand this form of communication. This was made possible by using the library opcua-asyncio.
+opcua-asyncio is a Python 3 library and worked perfectly well with our Rasa Actions server, which was required to be written in Python. 
 \begin{center}
 	\includegraphics[width=0.95\linewidth]{images/design_of_project_concept.png}
 \end{center}
@@ -210,7 +210,7 @@ In order to further understand the exact process of a chatbot interaction, one c
 In this example a worker wants to know the state of a safety door on the machine. 
 They input their command through Rasa X which is a chat UI that is shipped with Rasa. 
 The different components integrated into Rasa then take over and decipher the user’s intent and extract the exact door number. 
-Next Rasa actions contacts the atvise server to find out about the specified safety door's state. 
+Next Rasa Actions contacts the atvise server to find out about the specified safety door's state. 
 Finally, the answer is passed back to the worker.
 
 }
